@@ -11,7 +11,7 @@ String path = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%-- path기준으로 모든 자원(css,img,js)를 접근하여 사용할 수 있다. --%>
-<link rel="stylesheet" href="<%=path %>/a01_sign/reset.css"> 
+<link rel="stylesheet" href="../css/reset.css"> 
 <title>Insert title here</title>
 <style>
 #content{
@@ -63,12 +63,13 @@ String path = request.getContextPath();
 <link type ="text/css" rel="stylesheet" href="../css/main_upper.css">  
 </head>
 <body>
-<jsp:include page="../final/main_upper.jsp" flush="false"/>
+<jsp:include page="../final/main_upper.jsp" flush="false"/>  
 <% String pageChange;%><!-- 각 jsp include페이지에 넘겨줄값 -->
 	<div id="content">
 	<div id="header">
 		<div id="id_logout">
-			<div id="id_text"> <%=session.getAttribute("id")%></div>
+			<jsp:useBean id="m" class="project.vo_login.Member" scope="session"></jsp:useBean>
+			<div id="id_text"> <%=m.getId()%></div>
 			<div id="logout" onclick="logout()">로그아웃</div>
 		</div>
 		<!-- id_logout -->
@@ -87,7 +88,7 @@ String path = request.getContextPath();
 				select="announce.jsp";
 			}
 		%>
-		<jsp:include page="<%=select %>"></jsp:include> <!-- 클릭 시 넘어온 주소에 따라 화면 바뀜 -->
+		<jsp:include page="<%=select %>" flush="false"></jsp:include> <!-- 클릭 시 넘어온 주소에 따라 화면 바뀜 -->
 	</div>
 	<!-- main -->
 	</div>
@@ -98,7 +99,6 @@ function logout(){
 	<%session.invalidate();%>
 	alert('로그아웃\n로그인페이지로 이동');
 	location.href="login.jsp";
-	
 }
 
 </script>

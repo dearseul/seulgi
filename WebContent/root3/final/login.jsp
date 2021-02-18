@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="project.dao_login.*"
+    import="project.vo_login.*"%>
 <% request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
 %>
@@ -11,7 +12,7 @@ String path = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%-- path기준으로 모든 자원(css,img,js)를 접근하여 사용할 수 있다. --%>
-<link rel="stylesheet" href="<%=path %>/a01_sign/reset.css"> 
+<link rel="stylesheet" href="../css/reset.css"> 
 <title>Insert title here</title>
 <style>
 html, body
@@ -33,7 +34,8 @@ body
 }
 
 #loginbox
-{
+{	
+	padding:70px;
     height: 100%;
     display: center;
     text-align:center;
@@ -87,6 +89,7 @@ body
 </script> 
 <link type ="text/css" rel="stylesheet" href="../css/main_upper.css">  
 </head>
+<%-- 
  <%
 		String id = request.getParameter("id");
 		String pass= request.getParameter("pass");
@@ -100,6 +103,7 @@ body
 				}
 		}  
 %>
+--%>
 <body>
 <jsp:include page="../final/main_upper.jsp" flush="false"/>
 	<div id = "align">
@@ -116,6 +120,25 @@ body
 			<input id="input_login" type="button" value="로그인" onclick="login1()"> <br>
 			<input id="input_signUp" type="button" value="회원가입" onclick="signUp()" >
 		</form>
+		 <jsp:useBean id="m" class="project.vo_login.Member" scope ="session"/>
+   		<jsp:setProperty property="*" name="m"/>
+   <%
+   boolean isLogFail = false;
+   if(m.getId()!=null){ // 로그인 처리 후 
+	   log("##로그인한 id: "+m.getId());
+	   DAO_login dao = new DAO_login();
+	   Member m1 = dao.login(m);
+	   
+	   if(m1==null){ // 데이터가 없을 때 
+		   isLogFail=true;
+	   }else if(m!=null&&m1.getId().equals("admin")){
+		   // 데이터가 있을 때 처리.. 
+		   response.sendRedirect("admin01.jsp");
+	   }else{
+		   response.sendRedirect("main.jsp");
+	   }
+   }
+   %>
 	</div>
 	<!-- loginbox -->
 	</div>
@@ -124,6 +147,7 @@ body
 				
 <script>
 	function login1(){
+		/*
 		var id = document.querySelector("[name=id]").value;
 		var pass = document.querySelector("[name=pass]").value;
 		var frm = document.querySelector("#frm");
@@ -140,8 +164,15 @@ body
 				
 			}
 		}
+		*/
+		frm.submit();
 	}
-	
+	var isLogFail=<%=isLogFail%>;
+	if(isLogFail){
+		alert("아이디 또는 패스워드를 확인해주세요");
+		$("[name=id]").focus();
+		
+	}
 	
 	function signUp(){
 		location.href="signUp.jsp";
@@ -152,5 +183,6 @@ body
 	function searchPass(){
 		location.href="searchPass.jsp";
 	}
+	
 </script>
 </html>

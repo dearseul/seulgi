@@ -2,7 +2,7 @@
    div { display : block;}
    
    .page .layout{
-      height:100%;
+     /* height:100%; */
    }
    
    .header {
@@ -186,7 +186,6 @@
    */
    nav ul{
       width: 100%;
-      background-color : blue;
       list-style-type:none;
       margin: 0;
       padding : 0;
