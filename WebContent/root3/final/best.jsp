@@ -52,6 +52,7 @@ String path = request.getContextPath();
         });
     </script>
 <link type ="text/css" rel="stylesheet" href="../css/main_upper.css">      
+<link type ="text/css" rel="stylesheet" href="../css/reset.css"> 
 </head>
 <body>
 <jsp:include page="../final/main_upper.jsp" flush="false"/>

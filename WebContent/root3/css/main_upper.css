@@ -69,7 +69,7 @@
       position:relative;
        width: 300px;
        height: 25px;
-       <%--padding: 0 60px 0 14px;--%>
+ /*padding: 0 60px 0 14px;*/
        border: 1px solid #f7f7f6;
        border-radius: 18px;
        background-color: #f7f7f7;
@@ -92,10 +92,10 @@
       width:36px;
       height:36px;
       margin: 12px 0 0 0;
-      background:url(https://res.kurly.com/pc/service/common/2011/ico_cart.svg) no-repeat 50% 50%}
+      background:url(https://res.kurly.com/pc/service/common/2011/ico_cart.svg) no-repeat 50% 50%;
    }
    .right .cart:hover a {
-      background:url(https://res.kurly.com/pc/service/common/2011/ico_cart_on.svg?v=1) no-repeat 50% 50%}
+      background:url(https://res.kurly.com/pc/service/common/2011/ico_cart_on.svg?v=1) no-repeat 50% 50%;
       background-color:blue;
    }
    .login {
@@ -173,19 +173,19 @@
       text-align: center;
       display:block;
    }
-   <%--
+   /*
    .lower_layout :hover + .sub_category .sub {
       display:block;
       opacity:1;
    }
-   --%>
+
    .lower_layout nav:hover + .sub_category .sub {
       display:block;
       opacity:1;
    }
-   
-   nav ul {
-      width: 100%
+   */
+   nav ul{
+      width: 100%;
       background-color : blue;
       list-style-type:none;
       margin: 0;
@@ -198,14 +198,14 @@
       position:relative;
    }
    .dropdown-menu{
-      color:white;
+      color:#333;
       padding:16px 25px 16px 25px;
       font-size:20px;
       cursor:pointer;
    }
    .dropdown-content {
       position:absolute;
-      bachground-color:#f9f9f9;
+      background-color:#f9f9f9;
       min-width:160px;
       box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);
       display:none;
