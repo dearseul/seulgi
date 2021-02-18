@@ -11,7 +11,7 @@ String path = request.getContextPath();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%-- path기준으로 모든 자원(css,img,js)를 접근하여 사용할 수 있다. --%>
-<link rel="stylesheet" href="<%=path %>/a01_sign/reset.css"> 
+<link rel="stylesheet" href="<%=path %>/css/reset.css"> 
 <title>Insert title here</title>
 <style>
 #content{
