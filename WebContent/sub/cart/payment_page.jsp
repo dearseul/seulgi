@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import ="java.util.*"
+    %>
+<% request.setCharacterEncoding("UTF-8");
+   String path = request.getContextPath();
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/payCss.css">
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">
+</head>
+<body>
+<jsp:include page="<%=path %>/main_upper.jsp" flush="false"/>
+<div class="p1_title">
+   <div class="title">
+      <span>결제 페이지</span>
+      <hr/>
+   </div>
+</div>
+   <div class="pPage_main">
+         <div class="pPage_picture">
+            <img src="<%=path%>/images/bowl04.jpg"/>
+         </div>
+         <div class="pPage_proInfo">
+            <span>상품 브랜드 : 보울보울</span>
+            <span>상품명 : 디저트볼 블랙</span>
+            <span>상품 가격 : 6,500</span>
+         </div>
+         <div class="pPage_payInfo">
+            <div>상품 금액 : 20,000원</div>
+            <div>할인 금액 : 13,500원</div>
+            <div style="margin-bottom:15px;">주문 금액 : 6,500원</div>
+            
+            <div>배송비 : 0원</div>
+            <div style="margin-bottom:30px;">적립금 사용 : 0원</div>
+            <h3>최종 결제 금액</h3><br/>
+            <h4>6,500원</h4><br/>
+      </div>
+         <div class="pPage_payKind">
+            <label><input type="radio" name="payKind" value="1">카드</label>
+         <label><input type="radio" name="payKind" value="2">계좌이체</label>
+         <label><input type="radio" name="payKind" value="3">핸드폰결제</label>
+         <label><input type="radio" name="payKind" value="4">상품권</label>
+         </div>
+         <div class="pPage_payBtn">
+            <a href="" onclick="alert('결제가 완료되었습니다')">결제하기</a>
+         </div>
+      </div>
+</body>
+</html>

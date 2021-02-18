@@ -9,10 +9,9 @@ String path = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <%-- path기준으로 모든 자원(css,img,js)를 접근하여 사용할 수 있다. --%>
-<link rel="stylesheet" href="<%=path %>/a01_sign/reset.css"> 
-<title>Insert title here</title>
+<link rel="stylesheet" href="<%=path %>/css/reset.css"> 
 <style>
 #content{
 	width:1050px;
@@ -34,11 +33,8 @@ String path = request.getContextPath();
 }
 #write_tab td{
 	vertical-align:middle;
-
-	width:300px;
-	
+	width:300px;	
 }
-
 #input_content{
 	width:700px;
 	height:400px;
