@@ -94,7 +94,7 @@ String path = request.getContextPath();
 function logout(){
 	<%session.invalidate();%>
 	alert('로그아웃\n로그인페이지로 이동');
-	location.href="login.jsp";
+	location.href="../sub/join/login.jsp";
 	
 }
 

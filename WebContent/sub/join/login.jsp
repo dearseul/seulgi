@@ -92,10 +92,10 @@ body
 		if(id!=null && pass!=null){
 				if(id.equals("admin")){
 					session.setAttribute("id",id);
-					response.sendRedirect("admin01.jsp");
+					response.sendRedirect("../../admin/admin01.jsp");
 				}else{
 					session.setAttribute("id",id);
-					response.sendRedirect("main.jsp");
+					response.sendRedirect("../../index.jsp");
 				}
 		}  
 %>
