@@ -248,8 +248,8 @@ a {
                     
             <div class="btn_choice_box">
 				<div>
-					<a href="cart.jsp"><button class="btn_add_cart" onclick="addCart()">장바구니</button></a>
-					<a href="login.jsp"><button class="btn_add_wish" onclick="dirBuy()" style="background-color:black; color:white;">바로 구매</button></a>
+					<a href="<%=path %>/sub/cart/cart.jsp"><button class="btn_add_cart" onclick="addCart()">장바구니</button></a>
+					<a href="<%=path %>/sub/join/login.jsp"><button class="btn_add_wish" onclick="dirBuy()" style="background-color:black; color:white;">바로 구매</button></a>
 				</div>
             </div>
             <!-- //btn_choice_box -->

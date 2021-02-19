@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type ="text/css" rel="stylesheet" href="css/cart.css">
+
 <script>
    window.onload=function(){
 
@@ -19,6 +19,7 @@
 </script>
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">  
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/cart.css">
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/reset.css">
 </head>
 <body>
    <div class="page">
@@ -28,8 +29,8 @@
                <div class="total_upper">
                   <div class="upper_layout">
                      <div class="left_logo">
-                        <a class="logo" href="main.jsp">
-                           <img src="../img_ycm/logo.png" alt="메인 로고" class="icon" style="display: block">
+                        <a class="logo" href="<%=path %>/index.jsp">
+                           <img src="<%=path %>/images/logo.png" alt="메인 로고" class="icon" style="display: block">
                         </a>
                      </div>
                      <div class="center_menu">
@@ -39,13 +40,13 @@
                         </form>
                      </div>
                      <div class="right">
-                        <a class="cart" title="장바구니" href="cart.jsp">
+                        <a class="cart" title="장바구니" href="<%=path %>/sub/cart/cart.jsp">
                         
                         </a>
                         <div class="login">
                            <ul class="list_menu">
-                              <li class="menu none_sub menu_join"><a href="login.jsp" class="login_text">로그인</a></li>
-                              <li class="menu none_sub"><a href="register.jsp" class="login_text">회원가입</a></li>
+                              <li class="menu none_sub menu_join"><a href="<%=path %>/join/login.jsp" class="login_text">로그인</a></li>
+                              <li class="menu none_sub"><a href="<%=path %>/join/signUp.jsp" class="login_text">회원가입</a></li>
                            </ul>
                         </div>
                      </div>
@@ -92,7 +93,7 @@
                                                    </div>
                                                    <a class="product_content" <%-- href="상품상세페이지"--%>>
                                                       <div class="product_img">
-                                                         <a href="NewFile.jsp"><img src="../img_kyh/bowl01.jpg" width="70px"></a>
+                                                         <a href="<%=path %>/sub/Product/ProductDatail.jsp"><img src="<%=path %>/images/bowl01.jpg" width="70px"></a>
                                                       </div>
                                                       <div class="product_name">
                                                          <h1 class="product_title"></h1>
@@ -141,7 +142,7 @@
                                                    </ul>
                                                    <div class="product_option_change">
                                                       <span class="product_option">
-                                                         <a href="NewFile.jsp"><button class="edit_option" type="button">옵션변경</button></a>
+                                                         <a href="<%=path %>/sub/Product/ProductDatail.jsp"><button class="edit_option" type="button">옵션변경</button></a>
                                                       </span>
                                                       <span class="product_subtotal">
                                                          <span class="product_subtotal_price">39,900</span>원

@@ -15,7 +15,7 @@
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">
 </head>
 <body>
-<jsp:include page="<%=path %>/main_upper.jsp" flush="false"/>
+<jsp:include page="/main_upper.jsp" flush="false"/>
 <div class="p1_title">
    <div class="title">
       <span>결제 페이지</span>

@@ -39,6 +39,7 @@
     /*category-sale-slider*/
     .sale-slider { margin-top: 30px; }
     .title-sale { margin: 20px 0; font-size: 20px; color: #333; font-weight: 700; }
+    .prd-content-list { cursor:pointer; }
     .prd-content-list:hover .prd-img>img{ transform: translate(-50%,-50%) scale(1.2); }
     .prd-img { position: relative; overflow: hidden; width: 100%; height: 225px;}
     .prd-img img { width: 100%;    position: absolute; top: 50%; left: 50%; width: 100%; transform: translate(-50%,-50%); transition: transform .2s; }
@@ -63,6 +64,9 @@
             $(this).siblings().removeClass('on');
         });
     });
+   var pdClick = function(){
+    	location.href="<%=path %>/sub/Product/ProductDetail.jsp";
+    }
 </script>
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/middle.css"> 
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">  
@@ -238,7 +242,7 @@
                 <div class="swiper-container container-slider-sale">
                     <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <div class="prd-content-list">
+                      <div class="prd-content-list" onclick="pdClick()">
                             <div class="prd-img"><img src="<%=path%>/images/list_img1.jpg" alt=""></div>
                             <div class="prd-text">
                                 <h6 class="brand">보울보울</h6>

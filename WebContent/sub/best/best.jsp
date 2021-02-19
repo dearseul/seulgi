@@ -27,7 +27,7 @@ String path = request.getContextPath();
     .prd-content-list { float: left; width: 24%; margin-right: 1%; margin-bottom: 4%;}
     .prd-content-list:nth-child(4) { margin-right: 0; }
     .title-sale { margin: 20px 0; font-size: 20px; color: #333; font-weight: 700; }
-    .prd-content-list:hover .prd-img>img{ transform: translate(-50%,-50%) scale(1.2); }
+    .prd-content-list:hover .prd-img img { transform: translate(-50%,-50%) scale(1.2); }
     .prd-img { position: relative; overflow: hidden; width: 100%; height: 225px;}
     .prd-img img { width: 100%; position: absolute; top: 50%; left: 50%; width: 100%; transform: translate(-50%,-50%); transition: transform .2s; }
     .prd-text .brand { padding-top: 5px; color: #999; font-size: 13px; }
@@ -64,7 +64,10 @@ String path = request.getContextPath();
         <section class="setion-best">
             <ul class="list-best list-best-01">
                 <li class="prd-content-list">
-                    <div class="prd-img"><a href="NewFile.jsp"><img src="<%=path %>/images/list_img1.jpg" alt=""></a></div>
+                    <div class="prd-img">
+                    	<a href="<%=path %>/sub/Product/ProductDetail.jsp">
+                    	<img src="<%=path %>/images/list_img1.jpg" alt=""></a>
+                    </div>
                     <div class="prd-text">
                         <h6 class="brand">보울보울</h6>
                         <h5 class="title">볼볼홈파티 주병세트</h5>
