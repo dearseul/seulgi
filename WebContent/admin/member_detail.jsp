@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="jspexp.z01_vo.*"
+    import="project.dao_admin.*"
+    import="project.vo_join.*"%>
 <% request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
 %>
@@ -36,7 +38,7 @@ String path = request.getContextPath();
 	vertical-align:middle;
 }
 
-#input_mno, #input_id, #input_name, #input_email,#input_date, #input_order{
+#input_mno, #input_id, #input_name, #input_email,#input_birthdate,#input_regdate, #input_order,#input_address,#input_phone,#input_gender{
 	width:500px;
 	height:50px;
 }
@@ -55,25 +57,30 @@ String path = request.getContextPath();
 }
 
 </style>
-
 </head>
+<%
+String customer_id = request.getParameter("customer_id");
+DAO_admin dao = new DAO_admin();
+Customer c = dao.getCustomer(customer_id);
+%>
 <body>
 	<div id="content">
 		<div id="member_detail">
-			<div id="mem_text">회원정보상세</div>
+			<div id="mem_text">회원정보상세(<%=customer_id%>)</div>
 			<form>
 				<table id="mem_tab">
-					<tr><th>회원번호</th><td><input id="input_mno" type="text" name="mno"></td></tr>
-					<tr><th>아이디</th><td><input id="input_id" type="text" name="id"></td></tr>
-					<tr><th>이름</th><td><input id="input_name" type="text" name="name"></td></tr>
-					<tr><th>이메일</th><td><input id="input_email" type="text" name="email"></td></tr>
-					<tr><th>가입일자</th><td><input id="input_date" type="text" name="date"></td></tr>
-					<tr><th>최근주문내역</th><td><input id="input_order" type="text" name="order"></td></tr>
+					<tr><th>아이디</th><td><input id="input_id" type="text" name="id" value="<%=c.getCustomer_id() %>"></td></tr>
+					<tr><th>이름</th><td><input id="input_name" type="text" name="name" value="<%=c.getName()%>"></td></tr>
+					<tr><th>주소</th><td><input id="input_address" type="text" name="address" value="<%=c.getAddress()%>"></td></tr>
+					<tr><th>이메일</th><td><input id="input_email" type="text" name="email" value="<%=c.getEmail()%>"></td></tr>
+					<tr><th>휴대폰</th><td><input id="input_phone" type="text" name="phone" value="<%=c.getPhone()%>"></td></tr>
+					<tr><th>성별</th><td><input id="input_gender" type="text" name="gender" value="<%=c.getGender()%>"></td></tr>
+					<tr><th>생년월일</th><td><input id="input_birthdate" type="text" name="birth_date" value="<%=c.getBirth_date()%>"></td></tr>
+					<tr><th>가입일자</th><td><input id="input_regdate" type="text" name="reg_date" value="<%=c.getReg_date()%>"></td></tr>
 					<tr><th id="button" colspan="2"><input id="submit" type="button" value="수정" onclick="location.href='member_modify.jsp'"></th></tr>
 				</table>
 			</form>
 		</div>
 	</div>
-
 </body>
 </html>

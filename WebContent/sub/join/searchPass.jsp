@@ -32,6 +32,7 @@ body
 }
 #searchbox
 {
+	padding:70px;
     height: 100%;
     display: center;
     text-align:center;
@@ -61,6 +62,7 @@ body
 	border-color:#334858"
 }
 #name_text, #email_text, #id_text{
+padding-right:227px;
 margin-bottom:2px;
 margin-top:10px;
 font-size:14px;
@@ -75,11 +77,11 @@ font-size:14px;
 		<div id="search_text">비밀번호찾기</div>
 		<form>
 			<div id="name_text">이름</div>
-			<input id="input_name" type="text" name="name" value="고객님의 이름을 입력해주세요" onfocus="this.value=''" ><br>
+			<input id="input_name" type="text" name="name" placeholder="고객님의 이름을 입력해주세요" ><br>
 			<div id="id_text">아이디</div>
-			<input id="input_id" type="text" name="id" value="아이디를 입력해주세요" onfocus="this.value=''" ><br>
+			<input id="input_id" type="text" name="id" placeholder="아이디를 입력해주세요" ><br>
 			<div id="email_text">이메일</div>
-			<input id="input_email" type="text" name="email" value="가입 시 등록하신 이메일을 입력해주세요" onfocus="this.value=''; "><br>
+			<input id="input_email" type="text" name="email" placeholder="가입 시 등록하신 이메일을 입력해주세요" ><br>
 			<input id="input_searchPass" type="button" value="비밀번호찾기" onclick="searchPass()" >
 		</form>
 	</div>

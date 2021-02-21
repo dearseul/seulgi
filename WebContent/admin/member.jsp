@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="jspexp.z01_vo.*"
+    import="project.dao_admin.*"
+    import="project.vo_join.*"%>
 <% request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
 %>
@@ -18,7 +20,7 @@ String path = request.getContextPath();
 	width:1000px;
 	
 }
-#tab_mem {
+#tab_mem, search {
 	margin:25px;
 	width:1000px;
 }
@@ -47,21 +49,45 @@ String path = request.getContextPath();
 	padding-left:30px;
 	font-size:20px;
 }
-
+#customer_id{
+	width:100px;
+}
+#tab_search{
+	margin:25px;
+	padding-left:30px;
+}
 </style>
 </head>
+<%
+String customer_id = request.getParameter("id");
+if(customer_id==null) customer_id="";
+DAO_admin dao = new DAO_admin();
+ArrayList<Customer> clist = dao.searchCustomer(customer_id);
+
+%>
 <body>
 	<div id="memberInfo">
+		<div id="tab_title">회원정보</div>
+		<div id="search">
+			<form method="post">
+			<table id="tab_search">
+				<tr><th>ID&nbsp;</th><td><input id="customer_id" name="id" value="<%=customer_id%>">&nbsp;</td><td><input type="submit" value="조회"></td></tr>
+			</table>
+			</form>
+		</div>
 		<table id="tab_mem">
-			<div id="tab_title">회원정보</div>
-			<tr><th>회원번호</th><th>아이디</th><th>이름</th><th>이메일</th><th>가입일자</th><th>상세/수정</th></tr>
-			<tr><td>3333</td><td>hong1</td><td>홍길동</td><td>hong1@gmail.com</td><td>2019/02/03</td><td><input type="button" value="상세" onclick="location.href='member_detail.jsp'"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
-			<tr><td>3332</td><td>hong2</td><td>홍길동</td><td>hong2@gmail.com</td><td>2019/02/03</td><td><input type="button" value="상세" onclick="location.href='member_detail.jsp'"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
-			<tr><td>3331</td><td>hong3</td><td>홍길동</td><td>hong3@gmail.com</td><td>2019/02/03</td><td><input type="button" value="상세" onclick="location.href='member_detail.jsp'"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
-			<tr><td>3330</td><td>hong4</td><td>홍길동</td><td>hong4@gmail.com</td><td>2019/02/03</td><td><input type="button" value="상세" onclick="location.href='member_detail.jsp'"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
-			<tr><td>3329</td><td>hong5</td><td>홍길동</td><td>hong5@gmail.com</td><td>2019/02/03</td><td><input type="button" value="상세" onclick="location.href='member_detail.jsp'"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
+			<tr><th>아이디</th><th>이름</th><th>이메일</th><th>가입일자</th><th>상세/수정</th></tr>
+			<%for(Customer c:clist){ %>
+			<tr><td><%=c.getCustomer_id() %></td><td><%=c.getName() %></td><td><%=c.getEmail() %></td><td><%=c.getReg_date() %></td>
+			<td><input type="button" value="상세" onclick="detail('<%=c.getCustomer_id()%>')"><input type="button" value="수정" onclick="location.href='member_modify.jsp'"></td></tr>
+			<%} %>
 		</table>
 	</div>
+<script type="text/javascript">
+function detail(customer_id){
+	location.href="member_detail.jsp?customer_id="+customer_id;
+}
+</script>
 </body>
 </html>
 

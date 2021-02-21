@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="jspexp.z01_vo.*"
+    import="project.dao_join.*"
+    import="project.vo_join.*"%>
 <% request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
 %>
@@ -26,10 +28,13 @@ html, body
 }
 #signupbox
 {
+	padding-top:20px;
     position:absolute;
     top:20%; left:40%;
 }
 #signup_text{
+	padding-left:87px;
+	padding-bottom:20px;
 	margin-top:40px;
 	font-size:20px; 
 	margin-bottom:40px;
@@ -37,28 +42,41 @@ html, body
 
 #input_name, #input_id,#input_pass,#input_pass_confirm{
 	width:250px; 
-	height:50px;
+	height:35px;
 	color:gray;
 	margin-bottom:30px;
 }
- #input_email{
+ #input_email1, #input_email2{
  	width:120px; 
-	height:50px;
+	height:35px;
 	color:gray;
 	margin-bottom:30px;
  }
-
+#input_phone1, #input_phone2, #input_phone3{
+	width:90px; 
+	height:35px;
+	color:gray;
+	margin-bottom:30px;
+}
 #input_signUp{
 	margin-top:50px;
 	margin-bottom:10px;
-	margin-left:50px;
+	margin-left:10px;
 	width:300px; 
 	height:50px; 
 	color: white; 
 	background-color:#334858; 
 	border-color:#334858";
 }
-#name_text, #email_text, #id_text,#pass_text,#terms_text{
+#postcode, #extraAddress, #detailAddress{
+	width:200px;
+	height:35px;
+}
+#address{
+	width:410px;
+	height:35px;
+}
+#name_text, #email_text, #id_text,#pass_text,#terms_text, #phone_text, #address_text{
 	margin-bottom:2px;
 	margin-top:10px;
 	font-size:14px;
@@ -78,7 +96,7 @@ html, body
 }
 #select_email{
 	width:120px;
-	height:50px;
+	height:40px;
 }
 #strong{
 	display:inline;
@@ -87,7 +105,16 @@ html, body
 
 #check_id{	
 	width:120px; 
-	height:50px;
+	height:40px;
+	color:white;
+	background-color:#334858; 
+	border-color:#334858";
+	margin-bottom:30px;
+	margin-left:20px;
+}
+#searchCode{
+	width:120px; 
+	height:40px;
 	color:white;
 	background-color:#334858; 
 	border-color:#334858";
@@ -95,7 +122,7 @@ html, body
 	margin-left:20px;
 }
 
-#check, #check_all{
+#check1, #check2, #check3, #check4, #check_all{
 	width:20px;
 	height:20px;
 	margin-right:10px;
@@ -103,26 +130,75 @@ html, body
 </style>
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css"> 
 </head>
+<%
+String name= request.getParameter("name");
+if(name==null) name ="";
+String customer_id = request.getParameter("customer_id");
+if(customer_id==null) customer_id = "";
+String pw = request.getParameter("pw");
+if(pw==null) pw ="";
+String pw_confirm = request.getParameter("pw_confirm");
+if(pw_confirm==null) pw_confirm="";
+String email1 = request.getParameter("email1");
+String email2 = request.getParameter("email2");
+if(email1==null) email1="";
+if(email2==null) email2="";
+String email = email1+"@"+email2;
+String phone1 = request.getParameter("phone1");
+String phone2 = request.getParameter("phone2");
+String phone3 = request.getParameter("phone3");
+if(phone1==null) phone1="";
+if(phone2==null) phone2="";
+if(phone3==null) phone3="";
+String phone = phone1+"-"+phone2+"-"+phone3;
+String postcode = request.getParameter("postcode");
+String address1 = request.getParameter("address1");
+String detailAddress = request.getParameter("detailAddress");
+String extraAddress = request.getParameter("extraAddress");
+if(address1==null) address1="";
+if(extraAddress==null) extraAddress="";
+if(detailAddress==null) detailAddress="";
+String address = address1+" "+detailAddress;
+log("#name: "+name);
+log("#id: "+customer_id);
+log("#pw: "+pw);
+log("#phone: "+phone);
+if((!name.equals(""))&&(!customer_id.equals(""))&&(!pw.equals(""))&&(!pw_confirm.equals(""))&&(!email.equals(""))&&(!phone.equals(""))&&(!address.equals(""))){
+	Customer cus = new Customer(customer_id, pw,name, address,email, phone);
+	DAO_login dao = new DAO_login();
+	dao.insertCustomer(cus);
+}
+
+%>
 <body>
+<script>
+var customer_id = "<%=customer_id%>";
+if(customer_id!=""){
+	if(confirm("회원가입완료\n로그인페이지로 이동합니다!")){
+		location.href="login.jsp";
+	}
+}
+</script>
 <jsp:include page="/main_upper.jsp" flush="false"/>
+
 	<div id="signupbox">
 		<div id="signup_text">회원가입</div>
-		<form>
+		<form method="post" id="frm">
 			<div id="name_text">이름</div>
-			<input id="input_name" type="text" name="name" value="이름을 입력해주세요" onfocus="this.value=''" ><br>
+			<input id="input_name" type="text" name="name" placeholder="이름을 입력해주세요" value=""><br>
 
 			<div id="id_text">아이디</div>
-			<input id="input_id" type="text" name="id" value="아이디를 입력해주세요" onfocus="this.value=''" >
+			<input id="input_id" type="text" name="customer_id" placeholder="아이디를 입력해주세요"  value="">
 			<input id="check_id" type="button" value="중복확인"><br>
 		
 			<div id="pass_text">비밀번호</div>
-			<input id="input_pass" type="text" name="pass" value="비밀번호는 8자 이상 입력해주세요" onfocus="this.value='' type='password';" ><br>
+			<input id="input_pass" type="password" name="pw" placeholder="비밀번호는 8자 이상 입력해주세요"  value=""><br>
 			<div id="pass_text">비밀번호확인</div>
-			<input id="input_pass_confirm" type="text" name="pass_confirm" value="비밀번호 확인" onfocus="this.value='' type='password';" ><br>
+			<input id="input_pass_confirm" type="password" name="pw_confirm" placeholder="비밀번호 확인"  value=""><br>
 			<div id="email_text">이메일</div>
-			<input id="input_email" type="text" name="email1" value="이메일을 입력해주세요" onfocus="this.value=''; ">
+			<input id="input_email1" type="text" name="email1" placeholder="이메일을 입력해주세요"  value="">
 				@
-			<input id="input_email" name="email2" type="text">
+			<input id="input_email2" name="email2" type="text"  value="">
 			<select name ="select_email" id="select_email" onchange="setEmail()">
 				<option value="">선택하세요</option>
 				<option value="naver.com">naver.com</option>
@@ -131,18 +207,30 @@ html, body
 				<option value="daum.net">daum.net</option>
 				<option value="1">직접입력</option>
 			</select>
+			<div id="phone_text">휴대폰 번호</div>
+			<input id="input_phone1" size="20" name="phone1" value="010" > -
+			<input id="input_phone2"  name="phone2" value=""  > -
+			<input id="input_phone3"  name="phone3" value="" >
+			<br>
+			<div id="address_text">주소</div>
+			<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+			<input type="button" id="searchCode" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br><br>
+			<input type="text" id="address" name="address1" placeholder="주소"><br><br>
+			<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
+			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+			<br>
 			<br>
 			<div id="terms_text">약관 동의</div>
 			<div id="terms">
-				<input id="check_all" type="checkbox" value="all">전체동의<br>
+				<input id="check_all" type="checkbox" >전체동의<br>
 				<hr>
-				<input id="check" type="checkbox" value="all">만 14세 이상입니다.<p id="strong">(필수)</p> <br>
-				<input id="check" type="checkbox" value="all">이용약관 <p id="strong">(필수)</p> <br>
-				<input id="check" type="checkbox" value="all">개인정보처리방침 <p id="strong">(필수)</p>  <br>
-				<input id="check" type="checkbox" value="all">이벤트, 프로모션 알림 메일 및 SMS 수신 (선택)<br>
+				<input id="check1" type="checkbox" class="normal" >만 14세 이상입니다.<p id="strong">(필수)</p> <br>
+				<input id="check2" type="checkbox" class="normal">이용약관 <p id="strong">(필수)</p> <br>
+				<input id="check3" type="checkbox" class="normal" >개인정보처리방침 <p id="strong">(필수)</p>  <br>
+				<input id="check4" type="checkbox" class="normal">이벤트, 프로모션 알림 메일 및 SMS 수신 (선택)<br>
 			</div>
-			<input id="input_signUp" type="button" value="회원가입 완료" onclick="signUp()" >
-		</form>
+			<input id="input_signUp" type="submit" value="회원가입 완료" >
+			</form>
 	</div>
 	<!-- signupbox -->
 </body>
@@ -158,7 +246,81 @@ function setEmail(emailValue){
 		input.readOnly = true;
         input.value = select.value;
 	}
-	
 }
+
+
+function signUp(){
+	var name = document.querySelector("[name=name]").value; 
+	if(name.trim()==""){
+		alert("이름을 입력해주세요");
+		return;
+	}
+	var customer_id = document.querySelector("[name=customer_id]").value; 
+	if(customer_id.trim()==""){
+		alert("아이디를 입력해주세요");
+		return;
+	}
+	
+	var pw = document.querySelector("[name=pw]").value;
+	if(pw.length<8){
+		alert("비밀번호는 8자 이상 입력해주세요");
+		return;
+	}
+	// 유효성 체크 후 최종적으로 전송처리 
+	document.querySelector("#frm").submit();
+}
+
+
+</script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailAddress").focus();
+            }
+        }).open();
+    }
+ 
 </script>
 </html>
