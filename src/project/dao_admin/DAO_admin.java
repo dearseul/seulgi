@@ -2,6 +2,7 @@ package project.dao_admin;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import project.vo_join.Customer;
+import project.vo_join.*;
+import project.vo_admin.*;
 
 public class DAO_admin {
 		// 1. 데이터베이스 연결 처리 
@@ -110,10 +112,60 @@ public class DAO_admin {
 			}
 			return customer;
 		}
+		
+		
+	public ArrayList<Product> searchProduct(String product_name, String product_category){  //overloading
+			ArrayList<Product> list = new ArrayList<Product>(); 
+		//	1. 공통연결메서드 호출 
+			try {
+				setCon();
+		//	2. Statement 객체 생성 (연결객체-Connection) 
+				String sql = "SELECT * FROM products \n"
+						+ "WHERE product_name LIKE '%'||?||'%'\n"
+						+ "AND product_category LIKE '%'||?||'%'";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, product_name);
+				pstmt.setString(2, product_category);
+				
+		//	3. ResultSet 객체 생성 (대화객체-Statement) 
+				rs = pstmt.executeQuery();
+				
+				int cnt = 1; 
+				while(rs.next()) {
+					// 1.객체 생성과 할당 
+					// String product_name, int product_id, String product_category, int product_price, int product_stock,
+					// int product_rate, String product_img_src
+					Product p = new Product(rs.getString("product_name"),rs.getInt("product_id"),rs.getString("product_category"),
+							rs.getInt("product_price"),rs.getInt("product_stock"),rs.getInt("product_rate"),rs.getString("product_img_src")
+							); 
+					// 2. ArrayList에 할당 
+					list.add(p);
+				}
+				System.out.println("객체의 갯수: "+list.size());
+				System.out.println("두번째 데이터: "+list.get(1).getProduct_name());
+		
+		//	4. 자원의 해제 
+				rs.close();
+				pstmt.close();
+				con.close();
+		//	5. 예외 처리 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("DB관련에러");
+				System.out.println(e.getMessage());
+			}catch(Exception e) {
+				System.out.println("기타에러");
+				System.out.println(e.getMessage());
+			}
+			return list; 
+		}
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DAO_admin dao = new DAO_admin();
-		dao.getCustomer("himan");
+		dao.searchProduct("","");
 	}
 
 }
