@@ -108,6 +108,36 @@ public class DAO_login {
 				System.out.println("일반에러: "+e.getMessage());
 			}
 		}
+		
+		public boolean checkId(String customer_id) { // 존재하는 id 확인 메서드 
+			boolean hasId=false;
+			try {
+				setCon();
+				String sql = "SELECT * FROM customer\n"
+						+ "WHERE customer_id=? ";
+						
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, customer_id);
+				pstmt.executeQuery();
+				rs=pstmt.executeQuery();
+				
+				hasId = rs.next(); // 데이터가 있을 때 ( id가 존재 할때 true return ) 
+				
+				rs.close();
+				pstmt.close();
+				con.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("DB에러");
+				System.out.println(e.getMessage());
+			} catch(Exception e) {
+				System.out.println("일반에러");
+				System.out.println(e.getMessage());
+			}
+			return hasId;
+		}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DAO_login dao = new DAO_login();

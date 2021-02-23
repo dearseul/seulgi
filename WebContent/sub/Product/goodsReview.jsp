@@ -4,6 +4,7 @@
     import="jspexp.z01_vo.*"
     import="project.vo_join.*"
     import="project.dao_review.*"
+    import="project.vo_review.*"
     %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();

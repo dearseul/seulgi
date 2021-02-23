@@ -163,17 +163,27 @@ log("#name: "+name);
 log("#id: "+customer_id);
 log("#pw: "+pw);
 log("#phone: "+phone);
+boolean isInit = true;
+boolean hasId = false;
+boolean forJoin = false;  // 회원가입완료와 중복확인 구분 
+if(!customer_id.equals("")){
+	isInit = false;
+	DAO_login checkdao = new DAO_login();
+	hasId = checkdao.checkId(customer_id);
+}
 if((!name.equals(""))&&(!customer_id.equals(""))&&(!pw.equals(""))&&(!pw_confirm.equals(""))&&(!email.equals(""))&&(!phone.equals(""))&&(!address.equals(""))){
 	Customer cus = new Customer(customer_id, pw,name, address,email, phone);
 	DAO_login dao = new DAO_login();
 	dao.insertCustomer(cus);
+	forJoin = true;  // 회원가입 완료 시 . 
 }
 
 %>
 <body>
+<script type="text/javascript" src="<%=path%>/jq/jquery-3.5.1.js"></script>
 <script>
-var customer_id = "<%=customer_id%>";
-if(customer_id!=""){
+var forJoin = <%=forJoin%>;
+if(forJoin){
 	if(confirm("회원가입완료\n로그인페이지로 이동합니다!")){
 		location.href="login.jsp";
 	}
@@ -189,7 +199,7 @@ if(customer_id!=""){
 
 			<div id="id_text">아이디</div>
 			<input id="input_id" type="text" name="customer_id" placeholder="아이디를 입력해주세요"  value="">
-			<input id="check_id" type="button" value="중복확인"><br>
+			<input id="check_id" type="button" value="중복확인" onclick="checkId()"><br>
 		
 			<div id="pass_text">비밀번호</div>
 			<input id="input_pass" type="password" name="pw" placeholder="비밀번호는 8자 이상 입력해주세요"  value=""><br>
@@ -222,15 +232,18 @@ if(customer_id!=""){
 			<br>
 			<div id="terms_text">약관 동의</div>
 			<div id="terms">
-				<input id="check_all" type="checkbox" >전체동의<br>
+				<input id="check_all" type="checkbox" name="check">전체동의<br>
 				<hr>
-				<input id="check1" type="checkbox" class="normal" >만 14세 이상입니다.<p id="strong">(필수)</p> <br>
-				<input id="check2" type="checkbox" class="normal">이용약관 <p id="strong">(필수)</p> <br>
-				<input id="check3" type="checkbox" class="normal" >개인정보처리방침 <p id="strong">(필수)</p>  <br>
-				<input id="check4" type="checkbox" class="normal">이벤트, 프로모션 알림 메일 및 SMS 수신 (선택)<br>
+				<input id="check1" type="checkbox" class="check" name="check" >만 14세 이상입니다.<p id="strong">(필수)</p> <br>
+				<input id="check2" type="checkbox" class="check"  name="check" >이용약관 <p id="strong">(필수)</p> <br>
+				<input id="check3" type="checkbox" class="check"  name="check"  >개인정보처리방침 <p id="strong">(필수)</p>  <br>
+				<input id="check4" type="checkbox" class="check" name="check" >이벤트, 프로모션 알림 메일 및 SMS 수신 (선택)<br>
 			</div>
 			<input id="input_signUp" type="submit" value="회원가입 완료" >
 			</form>
+			<jsp:useBean id="c1" class="project.vo_join.Customer"/>
+  			<jsp:setProperty property="customer_id" name="c1"/>
+  			<jsp:setProperty property="name" name="c1"/>
 	</div>
 	<!-- signupbox -->
 </body>
@@ -270,7 +283,38 @@ function signUp(){
 	document.querySelector("#frm").submit();
 }
 
+var isInit = <%=isInit%>
+var hasId = <%=hasId%>
+if(!isInit&!forJoin){	//요청값이 있을 때 , = id를 확인했을 때  && 회원가입완료 아닐 때 
+	if(hasId){
+		alert("이미 존재하는 id입니다.")
+		$("[name=name]").val("<%=c1.getName()%>");
+		$("[name=customer_id]").focus();
+	}else{
+		alert("등록가능한 id 입니다.");
+		$("[name=customer_id]").val("<%=c1.getCustomer_id()%>");
+		$("[name=name]").val("<%=c1.getName()%>");
+	}
+}
+function checkId(){
+	document.querySelector("#frm").submit();
+}
 
+$("#check_all").click(function(){
+	if($("#check_all").is(":checked")){
+		$(".check").prop("checked",true);
+	}else{
+		$(".check").prop("checked",false);
+	}
+});
+
+$(".check").click(function(){
+	if($("input[name='check']:checked").length==3){
+		$("#check_all").prop("checked",true);
+	}else{
+		$("#check_all").prop("checked",false);
+	}
+});
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
