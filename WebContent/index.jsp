@@ -8,7 +8,6 @@
    String path = request.getContextPath();
    Dao_mainNewPro pdao = new Dao_mainNewPro();
    ArrayList<groupProducts> plist = pdao.getNewPro();
-   
    ArrayList<groupProducts> pplist = pdao.getPopPro();
    
 %>    

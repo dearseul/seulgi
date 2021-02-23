@@ -23,7 +23,7 @@ html, body
 
 body
 {
-    display: table;
+ <%--   display: table; --%>
     margin: 0 auto;
 }
 

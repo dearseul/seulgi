@@ -82,7 +82,7 @@ String path = request.getContextPath();
                     <li class="box-point">포인트 <span class="coupon-cnt">1000</span></li>
                 </ul>
             </div>
-            <a href="oneQuestion.jsp"><button class="btn-profile btn-question">1:1 문의하기</button></a>
+            <a href="<%=path%>/sub/customService/oneQuestion.jsp"><button class="btn-profile btn-question">1:1 문의하기</button></a>
             <button class="btn-profile btn-edit">개인정보 확인/수정</button>
             <button class="btn-profile btn-shipinfo">배송지 관리</button>
         </section>

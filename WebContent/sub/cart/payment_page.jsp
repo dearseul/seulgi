@@ -5,7 +5,6 @@
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +15,6 @@
 </head>
 <body>
 <jsp:include page="../../main_upper.jsp" flush="false"/>
-
 	<div class="p1_title">
 	   <div class="title">
 	      <span>결제 페이지</span>
