@@ -76,7 +76,7 @@ html, body
 	width:410px;
 	height:35px;
 }
-#name_text, #email_text, #id_text,#pass_text,#terms_text, #phone_text, #address_text{
+#name_text, #email_text, #id_text,#pass_text,#pass_confirm_text,#terms_text, #phone_text, #address_text{
 	margin-bottom:2px;
 	margin-top:10px;
 	font-size:14px;
@@ -203,8 +203,9 @@ if(forJoin){
 		
 			<div id="pass_text">비밀번호</div>
 			<input id="input_pass" type="password" name="pw" placeholder="비밀번호는 8자 이상 입력해주세요"  value=""><br>
-			<div id="pass_text">비밀번호확인</div>
-			<input id="input_pass_confirm" type="password" name="pw_confirm" placeholder="비밀번호 확인"  value=""><br>
+			<div id="pass_confirm_text">비밀번호확인</div>
+			<input id="input_pass_confirm" type="password" name="pw_confirm" placeholder="비밀번호 확인"  value="">
+			<br>
 			<div id="email_text">이메일</div>
 			<input id="input_email1" type="text" name="email1" placeholder="이메일을 입력해주세요"  value="">
 				@
@@ -239,7 +240,7 @@ if(forJoin){
 				<input id="check3" type="checkbox" class="check"  name="check"  >개인정보처리방침 <p id="strong">(필수)</p>  <br>
 				<input id="check4" type="checkbox" class="check" name="check" >이벤트, 프로모션 알림 메일 및 SMS 수신 (선택)<br>
 			</div>
-			<input id="input_signUp" type="submit" value="회원가입 완료" >
+			<input id="input_signUp" type="button" value="회원가입 완료" onclick="signUp()">
 			</form>
 			<jsp:useBean id="c1" class="project.vo_join.Customer"/>
   			<jsp:setProperty property="customer_id" name="c1"/>
@@ -279,13 +280,22 @@ function signUp(){
 		alert("비밀번호는 8자 이상 입력해주세요");
 		return;
 	}
+	
+	var check1 = document.getElementById("check1");
+	var check2 = document.getElementById("check2");
+	var check3 = document.getElementById("check3");
+	if(!check1.checked||!check2.checked||!check3.checked){
+		alert("필수약관에 동의해주세요");
+		return;
+	}
+	
 	// 유효성 체크 후 최종적으로 전송처리 
 	document.querySelector("#frm").submit();
 }
 
 var isInit = <%=isInit%>
 var hasId = <%=hasId%>
-if(!isInit&!forJoin){	//요청값이 있을 때 , = id를 확인했을 때  && 회원가입완료 아닐 때 
+if(!isInit&&!forJoin){	//요청값이 있을 때 , = id를 확인했을 때  && 회원가입완료 아닐 때 
 	if(hasId){
 		alert("이미 존재하는 id입니다.")
 		$("[name=name]").val("<%=c1.getName()%>");
@@ -315,6 +325,18 @@ $(".check").click(function(){
 		$("#check_all").prop("checked",false);
 	}
 });
+
+
+$("#input_pass_confirm").focusout(function(){
+	var pass = document.getElementById("input_pass").value;
+	var pass_confirm = document.getElementById("input_pass_confirm").value;
+	if(pass==pass_confirm){
+		$("#pass_confirm_text").text("비밀번호 확인").css("color","black");
+	}else{
+		$("#pass_confirm_text").text("비밀번호가 일치하지 않습니다.").css("color","red");
+	}
+});
+
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
