@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="project.dao_main_newPro.Dao_mainNewPro"
+    import="project.vo_main_newPro.groupProducts"
+    %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
+   Dao_mainNewPro pdao = new Dao_mainNewPro();
+   ArrayList<groupProducts> plist = pdao.getNewPro();
+   
+   ArrayList<groupProducts> pplist = pdao.getPopPro();
+   
 %>    
 <!DOCTYPE html>
 <html>
@@ -25,36 +32,36 @@
       </div>
    </div>
    <!-- ===================================================================================== -->
-   <div class="main_b1">
-      <div class="main_b1_plist">
-         <div class="b1_title">
-            <h3 class="title">
-               <span>오늘의 추천 상품</span>
-               <hr/>
-            </h3>
-         </div>
-         <div class="b1_list">
+	<div class="main_b1">
+		<div class="main_b1_plist">
+			<div class="b1_title">
+			<h3 class="title">
+				<span>신상품</span>
+				<hr/>
+			</h3>
+		</div>
+		<div class="b1_list">
             <div class="list" style="margin: 0px 18px 0px 30px;">
-               <img src="<%=path %>/images/bowl01.jpg"/>
-               <div class="pInfo">디저트플레이트</div>
-               <div class="pPrice">12,900</div>
+               <img src="<%=path %>/<%=plist.get(0).getProduct_img_src()%>"/>
+               <div class="pInfo"><%=plist.get(0).getProduct_name() %></div>
+               <div class="pPrice"><%=plist.get(0).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 18px 0px 0px;">
-               <img src="<%=path %>/images/bowl03.jpg">
-               <div class="pInfo">디저트볼 화이트</div>
-               <div class="pPrice">6,500</div>
+               <img src="<%=path %>/<%=plist.get(1).getProduct_img_src()%>">
+               <div class="pInfo"><%=plist.get(1).getProduct_name() %></div>
+               <div class="pPrice"><%=plist.get(1).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 18px 0px 0px;">
-               <a href="payment_page.html" style="text-decoration:none; color:black;">
-               <img src="<%=path %>/images/bowl04.jpg">
-               <div class="pInfo">디저트볼 블랙</div>
-               <div class="pPrice">6,500</div></a>
+               <img src="<%=path %>/<%=plist.get(2).getProduct_img_src()%>">
+               <div class="pInfo"><%=plist.get(2).getProduct_name() %></div>
+               <div class="pPrice"><%=plist.get(2).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 0px 0px 0px;">
-               <img src="<%=path %>/images/bowl05.jpg">
-               <div class="pInfo">디저트볼 라벤더</div>
-               <div class="pPrice">6,500</div>
+               <img src="<%=path %>/<%=plist.get(3).getProduct_img_src()%>">
+               <div class="pInfo"><%=plist.get(3).getProduct_name() %></div>
+               <div class="pPrice"><%=plist.get(3).getProduct_price() %></div>
             </div>
+  
          </div>
       </div>
    </div>
@@ -69,24 +76,24 @@
          </div>
          <div class="b1_list">
             <div class="list" style="margin: 0px 18px 0px 30px;">
-               <img src="<%=path %>/images/bowl07.jpg">
-               <div class="pInfo">빅머그(파우더핑크)</div>
-               <div class="pPrice">13,900</div>
+               <img src="<%=path %>/<%=pplist.get(0).getProduct_img_src()%>">
+               <div class="pInfo"><%=pplist.get(0).getProduct_name() %></div>
+               <div class="pPrice"><%=pplist.get(0).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 18px 0px 0px;">
-               <img src="<%=path %>/images/bowl08.jpg">
-               <div class="pInfo">빅머그(카라멜베이지)</div>
-               <div class="pPrice">13,900</div>
+               <img src="<%=path %>/<%=pplist.get(1).getProduct_img_src()%>">
+               <div class="pInfo"><%=pplist.get(1).getProduct_name() %></div>
+               <div class="pPrice"><%=pplist.get(1).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 18px 0px 0px;">
-               <img src="<%=path %>/images/bowl01.jpg">
-               <div class="pInfo">디저트플레이트</div>
-               <div class="pPrice">12,900</div>
+               <img src="<%=path %>/<%=pplist.get(2).getProduct_img_src()%>">
+               <div class="pInfo"><%=pplist.get(2).getProduct_name() %></div>
+               <div class="pPrice"><%=pplist.get(2).getProduct_price() %></div>
             </div>
             <div class="list" style="margin: 0px 0px 0px 0px;">
-               <img src="<%=path %>/images/bowl03.jpg">
-               <div class="pInfo">디저트볼 화이트</div>
-               <div class="pPrice">6,500</div>
+               <img src="<%=path %>/<%=pplist.get(3).getProduct_img_src()%>">
+               <div class="pInfo"><%=pplist.get(3).getProduct_name() %></div>
+               <div class="pPrice"><%=pplist.get(3).getProduct_price() %></div>
             </div>
          </div>
       </div>
