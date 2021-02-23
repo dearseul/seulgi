@@ -70,10 +70,10 @@ public class Dao_mainNewPro {
 		try {
 			setCon();
 			String sql = "SELECT rownum, p.* from(\r\n"
-					+ "	SELECT * from products \r\n"
-					+ "	ORDER BY product_price DESC\r\n"
-					+ ")p\r\n"
-					+ "WHERE rownum BETWEEN 1 AND 4";
+					+ "	SELECT * FROM products\r\n"
+					+ "	ORDER BY product_rate DESC\r\n"
+					+ "	)p\r\n"
+					+ "	WHERE rownum BETWEEN 1 AND 4";
 //			public groupProducts(String product_name, String product_category, int product_price, String product_img_src)
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();

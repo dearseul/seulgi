@@ -93,7 +93,7 @@
                                                    </div>
                                                    <a class="product_content" <%-- href="상품상세페이지"--%>>
                                                       <div class="product_img">
-                                                         <a href="<%=path %>/sub/Product/ProductDatail.jsp"><img src="<%=path %>/images/bowl01.jpg" width="70px"></a>
+                                                         <a href="<%=path %>/sub/Product/ProductDetail.jsp"><img src="<%=path %>/images/bowl01.jpg" width="70px"></a>
                                                       </div>
                                                       <div class="product_name">
                                                          <h1 class="product_title"></h1>
