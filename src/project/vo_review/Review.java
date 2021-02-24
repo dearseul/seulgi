@@ -3,140 +3,141 @@ package project.vo_review;
 import java.util.Date;
 
 public class Review {
-	/*
-	customer_id varchar2(30),
-	re_id NUMBER,
-	re_title varchar2(50),
-	re_content varchar2(3000),
-	re_grade NUMBER,
-	re_date DATE,
-	product_id NUMBER,
-	product_name varchar2(50)
-	*/
+/*
+   customer_id varchar2(30),
+   review_id NUMBER,   --index
+   review_title varchar2(50),
+   review_content varchar2(1000),
+   review_satisfied NUMBER,   --만족도
+   review_img_src varchar(300), 
+   review_written_date DATE,
+   thumbs_up NUMBER, --좋아요
+   product_id NUMBER,
+   product_name varchar2(50)
+*/
 	private String customer_id;
-	private int re_id;
-	private String re_title;
-	private String re_content;
-	private int re_grade;
-	private Date re_date;
-	private String re_date_s; // 입력할 날짜 데이터
+	private int review_id;
+	private String review_title;
+	private String review_content;
+	private int review_satisfied;
+	private String review_img_src;
+	private Date review_written_date;
+	private String review_written_date_s;
+	private int thumbs_up;
 	private int product_id;
 	private String product_name;
-	
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Review(String customer_id, int re_id, String re_title, String re_content, int re_grade, String re_date_s,
-			int product_id, String product_name) {
+	public Review(String customer_id, int review_id, String review_title, String review_content, int review_satisfied,
+			String review_img_src, Date review_written_date, int thumbs_up, int product_id, String product_name) {
 		super();
 		this.customer_id = customer_id;
-		this.re_id = re_id;
-		this.re_title = re_title;
-		this.re_content = re_content;
-		this.re_grade = re_grade;
-		this.re_date_s = re_date_s;
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_satisfied = review_satisfied;
+		this.review_img_src = review_img_src;
+		this.review_written_date = review_written_date;
+		this.thumbs_up = thumbs_up;
 		this.product_id = product_id;
 		this.product_name = product_name;
 	}
-
-	public Review(String customer_id, int re_id, String re_title, String re_content, int re_grade, Date re_date,
-			int product_id, String product_name) {
+	public Review(int review_id, String review_title, String review_content, int review_satisfied) {
+		super();
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_satisfied = review_satisfied;
+	}
+	public Review(String review_title, String review_content, int review_satisfied) {
+		super();
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_satisfied = review_satisfied;
+	}
+	public Review(String customer_id, int review_id, String review_title, String review_content, int review_satisfied,
+			String review_img_src, String review_written_date_s, int thumbs_up, int product_id, String product_name) {
 		super();
 		this.customer_id = customer_id;
-		this.re_id = re_id;
-		this.re_title = re_title;
-		this.re_content = re_content;
-		this.re_grade = re_grade;
-		this.re_date = re_date;
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_satisfied = review_satisfied;
+		this.review_img_src = review_img_src;
+		this.review_written_date_s = review_written_date_s;
+		this.thumbs_up = thumbs_up;
 		this.product_id = product_id;
 		this.product_name = product_name;
 	}
-	
-	public Review(String customer_id, String re_title, String re_content, int re_grade) {
-		super();
-		this.customer_id = customer_id;
-		this.re_title = re_title;
-		this.re_content = re_content;
-		this.re_grade = re_grade;
-	}
-
 	public String getCustomer_id() {
 		return customer_id;
 	}
-
 	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
-
-	public int getRe_id() {
-		return re_id;
+	public int getReview_id() {
+		return review_id;
 	}
-
-	public void setRe_id(int re_id) {
-		this.re_id = re_id;
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
-
-	public String getRe_title() {
-		return re_title;
+	public String getReview_title() {
+		return review_title;
 	}
-
-	public void setRe_title(String re_title) {
-		this.re_title = re_title;
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
 	}
-
-	public String getRe_content() {
-		return re_content;
+	public String getReview_content() {
+		return review_content;
 	}
-
-	public void setRe_content(String re_content) {
-		this.re_content = re_content;
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
 	}
-
-	public int getRe_grade() {
-		return re_grade;
+	public int getReview_satisfied() {
+		return review_satisfied;
 	}
-
-	public void setRe_grade(int re_grade) {
-		this.re_grade = re_grade;
+	public void setReview_satisfied(int review_satisfied) {
+		this.review_satisfied = review_satisfied;
 	}
-
-	public Date getRe_date() {
-		return re_date;
+	public String getReview_img_src() {
+		return review_img_src;
 	}
-
-	public void setRe_date(Date re_date) {
-		this.re_date = re_date;
+	public void setReview_img_src(String review_img_src) {
+		this.review_img_src = review_img_src;
 	}
-
-	public String getRe_date_s() {
-		return re_date_s;
+	public Date getReview_written_date() {
+		return review_written_date;
 	}
-
-	public void setRe_date_s(String re_date_s) {
-		this.re_date_s = re_date_s;
+	public void setReview_written_date(Date review_written_date) {
+		this.review_written_date = review_written_date;
 	}
-
+	public String getReview_written_date_s() {
+		return review_written_date_s;
+	}
+	public void setReview_written_date_s(String review_written_date_s) {
+		this.review_written_date_s = review_written_date_s;
+	}
+	public int getThumbs_up() {
+		return thumbs_up;
+	}
+	public void setThumbs_up(int thumbs_up) {
+		this.thumbs_up = thumbs_up;
+	}
 	public int getProduct_id() {
 		return product_id;
 	}
-
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
-
 	public String getProduct_name() {
 		return product_name;
 	}
-
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
-
+	
 }

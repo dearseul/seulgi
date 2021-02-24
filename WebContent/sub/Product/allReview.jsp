@@ -16,7 +16,7 @@
    href="<%=path%>/a00_com/a00_com.css">
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/cssAll.css">    
 <style>
-
+	li{float:left};
 </style>
 <script type="text/javascript"
 	src="<%=path%>/a00_com/jquery-3.5.1.js"></script>
@@ -39,22 +39,6 @@ ArrayList<Review> rlist = dao.reviewlist();
 	<div class="board_zone_cont">
 		<div class="board_zone_list" align="center">
 			<table class="board_list_table" style="width:100%">
-				<colgroup>
-					<col style="width:60px">
-					<col>
-					<col style="width:100px">
-					<col style="width:80px">
-					<col style="width:60px">
-				</colgroup>
-				<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>날짜</th>
-					<th>작성자</th>
-					<th>조회</th>
-				</tr>
-				</thead>
 				<tbody>
 				</tbody>
 			</table>
@@ -72,77 +56,49 @@ ArrayList<Review> rlist = dao.reviewlist();
 						<div class="gallery_cont">
 							<div class="board_img">
 								<a href="ProductDetail.jsp">
-									<img src="<%=path%>/images/detail_img1.jpg" width="160" height="145" class="js_image_load">
+									<img src="<%=path%>/<%=r.getReview_img_src() %>" width="160" height="145" class="js_image_load">
 								</a>
 							</div>
 							<div class="gallery_info_cont">
 								<div class="rating_star_box">
 									<span class="rating_star">
-										<span style="width:100%;"><%=r.getRe_grade() %></span>
+										<span style="width:100%;">평점 <%=r.getReview_satisfied() %></span>
 									</span>
+<!-- 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button style="text-align:center; color:red;" onclick="dele()">삭제하기</button> -->
 								</div>
 
 								<div class="board_tit">
-									<a href="javascript:gd_btn_view('goodsreview',1527 , 'y')">
-										<strong><%=r.getRe_title() %></strong>
-									</a>
+									<strong onclick="detail(<%=r.getReview_id() %>)"><%=r.getReview_title() %></strong>
 								</div>
 
 								<div class="board_name_day">
-									<span class="board_name">네이버페이 구매자</span>
-									<span class="board_day"><span><%=r.getRe_date() %></span></span>
+									<span class="board_day"><span><%=r.getReview_written_date_s() %></span></span>
 								</div>
 							</div>
 							<!-- //gallery_info_cont -->
 						</div>
 						<!-- //gallery_cont -->						
-					
+						</li>	
 					<%} %>
-<%-- 					<li style="width:25%">
-						<div class="gallery_cont">
-							<div class="board_img">
-								<a href="javascript:gd_btn_view('goodsreview',1527 , 'y')">
-									<img src="<%=path%>/images/detail_img1.jpg" width="160" height="145" class="js_image_load">
-								</a>
-							</div>
-							<div class="gallery_info_cont">
-								<div class="rating_star_box">
-									<span class="rating_star">
-										<span style="width:100%;">#평점#</span>
-									</span>
-								</div>
-
-								<div class="board_tit">
-									<a href="javascript:gd_btn_view('goodsreview',1527 , 'y')">
-										<strong>#제목#</strong>
-									</a>
-								</div>
-
-								<div class="board_name_day">
-									<span class="board_name">네이버페이 구매자</span>
-									<span class="board_day"><span>#날짜#</span></span>
-								</div>
-							</div>
-						</div>
-					</li> --%>
 				</ul>
 			</div>
 			<!-- //board_list_gallery -->
 		</div>
 		<!-- //board_zone_list -->
-		<div class="btn_right_box">
-			<button type="button" class="btn_write" onclick="javascript:gd_btn_write('goodsreview')"><strong>글쓰기</strong></button>
-		</div>
 	</div>
 	<!-- //board_zone_cont -->
 
 </div>
 <!-- //board_zone_sec -->
-
-
-<div id="layerDim" class="dn">&nbsp;</div>
 </div>
 <!-- //content -->
 </div>
 </body>
+<script>
+	function detail(review_id){
+		location.href="reviewDetail.jsp?review_id="+review_id;
+	}
+</script>
 </html>

@@ -493,7 +493,7 @@ a {
 					</div>
 				</div>
 				<div class="btn_reviews_box">
-					<a href="../board/list.php?bdId=goodsreview" class="btn_reviews_more">상품후기 전체보기</a>
+					<a href="allReview.jsp" class="btn_reviews_more">상품후기 전체보기</a>
 					<a href="goodsReview.jsp" class="btn_reviews_write">상품후기 글쓰기</a>
 				</div>
 				<!-- //btn_reviews_box -->
