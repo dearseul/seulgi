@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import ="java.util.*"
+    import="project.dao_payment_page.Dao_payment_page"
+    import="project.vo_payment_page.paymentPro"
     %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
+   Dao_payment_page paydao = new Dao_payment_page();
+   ArrayList<paymentPro> paylist = paydao.getPayPro();
 %>
 <!DOCTYPE html>
 <html>
@@ -25,20 +29,18 @@
 		<table id="pay-List">
 			<col width="10%"><col width="20%"><col width="30%"><col width="10%">
 			<col width="10%"><col width="10%"><col width="20%">
-			<tr><th>번호</th><th>이미지</th><th>상품정보</th><th>수량</th><th>가격</th><th>배송비</th><th>주문금액</th><tr>
+			<tr><th>번호</th><th>이미지</th><th>상품정보</th><th>수량</th><th>가격</th><th>주문금액</th><tr>
 			<tr><td>1</td>
-				<td><img src="<%=path%>/images/bowl06.jpg"/></td>
-				<td class="left">자연의그릇</td>
+				<td><img src="<%=path%>/<%=paylist.get(0).getProduct_img_src()%>"/></td>
+				<td class="left"><%=paylist.get(0).getProduct_name() %></td>
 				<td>4</td>
-				<td>2,000</td>
-				<td>무료</td>
+				<td><%=paylist.get(0).getProduct_price() %></td>
 				<td>3,000</td><tr>		
 			<tr><td>2</td>
-				<td><img src="<%=path%>/images/bowl07.jpg"/></td>
-				<td class="left">자연의그릇</td>
+				<td><img src="<%=path%>/<%=paylist.get(1).getProduct_img_src()%>"/></td>
+				<td class="left"><%=paylist.get(1).getProduct_name() %></td>
 				<td>3</td>
-				<td>1,000</td>
-				<td>무료</td>
+				<td><%=paylist.get(1).getProduct_price() %></td>
 				<td>3,000</td><tr>		
 		</table>
 		<div id="pay-box">
