@@ -4,6 +4,20 @@
     %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
+   String customer_id = (String)session.getAttribute("id");
+   String pass = (String)session.getAttribute("pw");
+   //String input = request.getParameter("sword");
+   boolean check = false;
+   if(customer_id!=null && pass!=null){
+         System.out.println("upper: " + customer_id);
+         System.out.println("upper: " + pass);
+         check = true;
+   }
+   
+   //if(input != null){
+      //session.setAttribute("search",input);
+      //response.sendRedirect("sub/join/search.jsp?search="+input);
+   //}
 %>
 
 <!DOCTYPE html>
@@ -30,7 +44,7 @@
                         </a>
                      </div>
                      <div class="center_menu">
-                        <form action="<%=path %>/sub/join/search.jsp">
+                        <form action="<%=path %>/sub/join/search.jsp" method="get"><%-- action="<%=path %>/sub/join/search.jsp" --%>
                            <input name="sword" type="text" class="inp_search">
                            <input type="image" class="btn_search" src="https://res.kurly.com/pc/service/common/1908/ico_search_x2.png">
                         </form>
@@ -41,8 +55,13 @@
                         </a>
                         <div class="login">
                            <ul class="list_menu">
+                           <% if(!check){%>
                               <li class="menu none_sub menu_join"><a href="<%=path %>/sub/join/login.jsp" class="login_text">로그인</a></li>
                               <li class="menu none_sub"><a href="<%=path %>/sub/join/signUp.jsp" class="login_text">회원가입</a></li>
+                             <%} else {%> 
+                             <li class="menu none_sub menu_join"><a href="<%=path %>/sub/mypage/mypage.jsp" class="login_text"><%=customer_id %></a></li>
+                             <li class="menu none_sub"><a href="<%=path %>/sub/join/logout.jsp" class="login_text">로그아웃</a></li>
+                             <%} %>
                            </ul>
                         </div>
                      </div>
@@ -68,7 +87,7 @@
                      <nav>
                         <ul>
                            <li class="dropdown">
-                              <div class="dropdown-menu"><a href="<%=path %>/sub/category/category.jsp">전체카테고리</a></div>
+                              <div class="dropdown-menu"><a href="<%=path%>/sub/category/category.jsp">전체카테고리</a></div>
                               <div class="dropdown-content">
                                  <a href="dish1.jsp">dish1</a>
                                  <a href="dish2.jsp">dish2</a>
@@ -81,7 +100,7 @@
                            </li>
                            <li class="dropdown">
                               <div class="dropdown-menu">
-                                 <a href="<%=path %>/sub/best/best.jsp">베스트</a>
+                                 <a href="<%=path%>/sub/best/best.jsp">베스트</a>
                               </div>
                            <!--
                            </li>
@@ -92,10 +111,10 @@
                            </li>
                              -->
                            <li class="dropdown">
-                           		<div class="dropdown-menu">
-                           			<a href="<%=path %>/sub/customService/customer.jsp">고객센터</a>
-                           		</div>
-                           </li>	
+                                 <div class="dropdown-menu">
+                                    <a href="<%=path%>/sub/customService/customer.jsp">고객센터</a>
+                                 </div>
+                           </li>   
                         </ul>
                      </nav>
                   </div>
