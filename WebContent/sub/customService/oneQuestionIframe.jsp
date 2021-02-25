@@ -96,17 +96,19 @@ log("#분류:"+question_kind);
 log("#작성자:"+question_writer);
 log("#제목:"+question_title);
 log("#내용:"+question_content);
+String id = (String)session.getAttribute("id");
 /*
 String customer_id, int question_id, String question_kind, 
 String question_writer,
 			String question_title, String question_content
 */
 if(!question_writer.equals("")){
-	Question ins = new Question("aaa123",0,question_kind,
+	Question ins = new Question(id,0,question_kind,
 			question_writer,question_title,question_content);
 	log("입력내용 확인:"+ins.getQuestion_writer());
 	DAO_question dao = new DAO_question();
 	dao.insertQuestion(ins);
+	
 }
 %>
 <body class="body-board body-write pc">

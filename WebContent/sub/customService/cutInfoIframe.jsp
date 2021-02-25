@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type ="text/css" rel="stylesheet" href="../css/cssAll.css">   
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/cssAll.css">   
 <style>
 
 	.btnView{cursor:pointer;}
@@ -76,7 +76,7 @@
                                 <td>5</td>
                                 <td>회원가입/정보</td>
                                 <td class="board_tit">
-                                        <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                        <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                         <strong class="btnView" id="que-6">회원 가입해야만 상품을 구매 할 수 있나요?</strong>
                                     <div class="answer" id="ans-6" style="display:none;">
                                     	<br>
@@ -90,7 +90,7 @@
                                 <td>4</td>
                                 <td>회원가입/정보</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-7">회원정보변경은 어떻게 하나요?</strong>
                                     <div class="answer" id="ans-7" style="display:none;">
                                     	<br>
@@ -104,7 +104,7 @@
                                 <td>3</td>
                                 <td>회원가입/정보</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-8">ID와 비밀번호 잊었을 땐 어떻게 하나요?</strong>
                                     <div class="answer" id="ans-8" style="display:none;">
                                     	<br>
@@ -123,7 +123,7 @@
                                 <td>2</td>
                                 <td>회원가입/정보</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-9">​회원 탈퇴는 어떻게 하나요?</strong>
                                     <div class="answer" id="ans-9" style="display:none;">
                                     	<br>
@@ -136,7 +136,7 @@
                                 <td>1</td>
                                 <td>회원가입/정보</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-10">회원가입은 어떻게 하나요?</strong>
                                     <div class="answer" id="ans-10" style="display:none;">
                                     	<br>

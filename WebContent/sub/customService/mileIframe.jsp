@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type ="text/css" rel="stylesheet" href="../css/cssAll.css">   
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/cssAll.css">   
 <style>
 	.btnView{cursor:pointer;}
 </style>
@@ -75,7 +75,7 @@
                                 <td>6</td>
                                 <td>마일리지 적립</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-5">마일리지는 어떻게 사용하나요?</strong>
                                     <div class="answer" id="ans-5" style="display:none;">
                                     	<br>

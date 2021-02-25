@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type ="text/css" rel="stylesheet" href="../css/cssAll.css">   
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/cssAll.css">   
 <style>
 
 	.btnView{cursor:pointer;}
@@ -76,7 +76,7 @@
                                 <td>10</td>
                                 <td>결제/배송</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-1">현금영수증 및 세금계산서 신청은 어떻게 하나요?</strong>
                                     <br><div class="answer" id="ans-1" style="display:none;">
                                     	<br>
@@ -89,7 +89,7 @@
                                 <td>9</td>
                                 <td>결제/배송</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-2">배송지 변경을 하고 싶어요</strong>
                                     <div class="answer" id="ans-2" style="display:none;">
                                     	<br>
@@ -102,7 +102,7 @@
                                 <td>8</td>
                                 <td>결제/배송</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-3">배송은 언제 시작 되나요?</strong>
                                     <div class="answer" id="ans-3" style="display:none;">
                                     	<br>

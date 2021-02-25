@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type ="text/css" rel="stylesheet" href="../css/cssAll.css">   
+<link type ="text/css" rel="stylesheet" href="<%=path %>/css/cssAll.css">   
 <style>
 	.btnView{cursor:pointer;}
 </style>
@@ -75,7 +75,7 @@
                                 <td>7</td>
                                 <td>교환/반품/환불</td>
                                 <td class="board_tit">
-                                    <span class="icon_qan"><img src="../img/findSmall.jpg" alt="질문제목"></span>
+                                    <span class="icon_qan"><img src="<%=path %>/images/findSmall.jpg" alt="질문제목"></span>
                                     <strong class="btnView" id="que-4">교환 및 반품 접수는 어떻게 하나요?</strong>
                                     <div class="answer" id="ans-4" style="display:none;">
                                     	<br>

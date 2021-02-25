@@ -48,6 +48,7 @@
 <%
 DAO_question dao = new DAO_question();
 ArrayList<Question> qlist = dao.questionlist();
+String id = (String)session.getAttribute("id");
 %>
 <body>
 <jsp:include page="/main_upper.jsp" flush="false"/>
@@ -64,7 +65,7 @@ ArrayList<Question> qlist = dao.questionlist();
 		<%for(Question q:qlist){ %>
 		<tr onclick="detail(<%=q.getQuestion_id() %>)">
 		<td><%=q.getQuestion_kind() %></td>
-		<td><%=q.getCustomer_id() %></td>
+		<td><%=id %></td>
 		<td><%=q.getQuestion_writer() %></td>
 		<td><%=q.getQuestion_title() %></td>
 		</tr>
