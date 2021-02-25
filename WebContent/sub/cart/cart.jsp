@@ -477,13 +477,13 @@
                               <script>
                                  finish.onclick = function(){
                                     var j = 0; // checked 된 버튼 인덱스
-                                    var address;
+                                    var address="";
                                     const checked = document.querySelectorAll('input[name="select_bt"]');
                                     checked.forEach((check) => {
                                        if(check.checked == true){
                                           console.log('j: ' +  j);
                                           console.log('cntcnt[j]: ' +  cntcnt[j]);
-                                          address += "cntcnt[j]="+cntcnt[j];
+                                          address += "cnt="+cntcnt[j]+"&";
                                        }
                                        // 마지막 번호만 넘어가짐, 배열을 넘기는 방법 강구
                                        
@@ -494,7 +494,7 @@
                                  }
                                  <%--
                                  delbt<%=i%>.onclick = function(){
-                                   if(confirm("삭제하시겠습니까?")){
+                                   if(confirm("삭제하시겠습-니까?")){
                                       document.querySelector("[name=proc]").value="del";
                                       document.querySelector("[name=prodname]").value="<%=product_list.get(i).getProduct_name()%>";
                                       document.querySelector("[name=prodid]").value="<%=product_list.get(i).getProduct_id()%>";

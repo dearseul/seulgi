@@ -30,21 +30,24 @@ public class Dao_payment_page {
 		}
 	}
 //=========================================결제상품 가져오기===================================================================
-	public ArrayList<paymentPro> getPayPro() {
+	public ArrayList<paymentPro> getPayPro(String customer_id) {
 		ArrayList<paymentPro> list = new ArrayList<paymentPro>();
 		try {
 			setCon();
-			String sql = "SELECT p.*, purchase_step\r\n"
+			String sql = "SELECT p.*, purchase_step, PURCHASE_ID \r\n"
 					+ "FROM PURCHASE_RECORD pr, PRODUCTS p \r\n"
 					+ "WHERE pr.PRODUCT_NAME = p.PRODUCT_NAME\r\n"
-					+ "AND PURCHASE_STEP ='장바구니'";
+					+ "AND PURCHASE_STEP ='장바구니'\r\n"
+					+ "AND customer_id = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, customer_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				
+
 				paymentPro y =new paymentPro(rs.getString("product_name"),
 						rs.getInt("product_id"), rs.getString("product_category"), rs.getInt("product_price"),
-						rs.getInt("product_stock"),rs.getInt("product_rate"), rs.getString("product_img_src"), rs.getString("purchase_step"));
+						rs.getInt("product_stock"),rs.getInt("product_rate"), rs.getString("product_img_src"), rs.getString("purchase_step"),
+						rs.getInt("purchase_id"));
 				list.add(y);
 			}
 
@@ -60,13 +63,37 @@ public class Dao_payment_page {
 		}
 		return list;
 	}
+//=========================================업데이트문===================================================================
+	public void updateStep(int PURCHASE_ID) {
+		try {
+			setCon();
+			String sql = "UPDATE purchase_record\r\n"
+					+ "SET  purchase_step='구매완료'\r\n"
+					+ "WHERE PURCHASE_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, PURCHASE_ID);
+			rs = pstmt.executeQuery();
+
+
+			rs.close();
+			pstmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+//=========================================업데이트문===================================================================
 
 	
 	public static void main(String[] args) {
-		Dao_payment_page dao = new Dao_payment_page();
-		ArrayList<paymentPro> arry = dao.getPayPro();
-		for(paymentPro p : arry) {
-			System.out.println(p.getProduct_name());
-		}
+//		Dao_payment_page dao = new Dao_payment_page();
+//		ArrayList<paymentPro> a = dao.getPayPro();
+//		for(paymentPro aa : a ) {
+//			System.out.println(aa.getProduct_id());
+//		}
 	}
 }

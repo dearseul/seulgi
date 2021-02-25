@@ -6,8 +6,9 @@
     %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
+   String customer_id = (String)session.getAttribute("id");
    Dao_payment_page paydao = new Dao_payment_page();
-   ArrayList<paymentPro> paylist = paydao.getPayPro();
+   ArrayList<paymentPro> paylist = paydao.getPayPro(customer_id);
 %>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,7 @@
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">
 </head>
 <body>
+
 <jsp:include page="../../main_upper.jsp" flush="false"/>
 	<div class="p1_title">
 	   <div class="title">
@@ -26,23 +28,34 @@
 	   </div>
 	</div>
 	<div id="pay-container">
+		<form method="post">
+			
 		<table id="pay-List">
 			<col width="10%"><col width="20%"><col width="30%"><col width="10%">
 			<col width="10%"><col width="10%"><col width="20%">
 			<tr><th>번호</th><th>이미지</th><th>상품정보</th><th>수량</th><th>가격</th><th>주문금액</th><tr>
-			<tr><td>1</td>
-				<td><img src="<%=path%>/<%=paylist.get(0).getProduct_img_src()%>"/></td>
-				<td class="left"><%=paylist.get(0).getProduct_name() %></td>
-				<td>4</td>
-				<td><%=paylist.get(0).getProduct_price() %></td>
-				<td>3,000</td><tr>		
-			<tr><td>2</td>
-				<td><img src="<%=path%>/<%=paylist.get(1).getProduct_img_src()%>"/></td>
-				<td class="left"><%=paylist.get(1).getProduct_name() %></td>
-				<td>3</td>
-				<td><%=paylist.get(1).getProduct_price() %></td>
-				<td>3,000</td><tr>		
+			<%
+				String[] cnts =  request.getParameterValues("cnt");
+			//카운트값을 받지못하면 에러가 나고, 임의로 cnt=i&cnt=i를 넣어야 작동
+				int[] count = new int[90];
+				for(int i=0; i<cnts.length;i++){
+					count[i] = Integer.parseInt(cnts[i]);
+				}
+				int total = 0;
+				for(int i=0; i<paylist.size(); i++){
+					total+=count[i]*paylist.get(i).getProduct_price();
+			%>
+			<input type="hidden" name="pno" value="<%=paylist.get(i).getPurchase_id() %>" />
+			<tr>
+				<td><%=i+1 %></td>
+				<td><img src="<%=path%>/<%=paylist.get(i).getProduct_img_src()%>"/></td>
+				<td class="left"><%=paylist.get(i).getProduct_name() %></td>
+				<td><%=cnts[i] %></td>
+				<td><%=paylist.get(i).getProduct_price() %></td>
+				<td><%= count[i]*paylist.get(i).getProduct_price() %></td><tr>		
+			<%} %>
 		</table>
+		</form>
 		<div id="pay-box">
 			<div id="payKind">
 				<label><input type="radio" name="payKind" value="card">카드</label>
@@ -51,12 +64,19 @@
          		<label><input type="radio" name="payKind" value="gift">상품권</label>
 			</div>
 			<div id="pay-btn">
-				<input type="button" value="결제하기"/>
+				<input type="button" value="결제하기" onclick="sendPay()"/>
 				<div id="totalPay">
-				30,000원
+				<%=total %>원
 				</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	function sendPay(){
+		document.querySelector("form").action="update.jsp";
+		document.querySelector("form").submit();
+	}
+		
+	</script>
 </body>
 </html>

@@ -11,12 +11,13 @@ public class paymentPro {
 	private int product_rate;
 	private String product_img_src;
 	private String purchase_step;
+	private int purchase_id;
 	public paymentPro() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public paymentPro(String product_name, int product_id, String product_category, int product_price,
-			int product_stock, int product_rate, String product_img_src, String purchase_step) {
+			int product_stock, int product_rate, String product_img_src, String purchase_step, int purchase_id) {
 		super();
 		this.product_name = product_name;
 		this.product_id = product_id;
@@ -26,6 +27,7 @@ public class paymentPro {
 		this.product_rate = product_rate;
 		this.product_img_src = product_img_src;
 		this.purchase_step = purchase_step;
+		this.purchase_id = purchase_id;
 	}
 	public String getProduct_name() {
 		return product_name;
@@ -75,4 +77,12 @@ public class paymentPro {
 	public void setPurchase_step(String purchase_step) {
 		this.purchase_step = purchase_step;
 	}
+	public int getPurchase_id() {
+		return purchase_id;
+	}
+	public void setPurchase_id(int purchase_id) {
+		this.purchase_id = purchase_id;
+	}
+
 }
+
