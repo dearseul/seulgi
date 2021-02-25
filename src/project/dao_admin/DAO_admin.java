@@ -3,6 +3,7 @@ package project.dao_admin;
 import java.sql.Connection;
 
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -162,10 +163,137 @@ public class DAO_admin {
 		}
 
 
+	public Product getProduct(int product_id){
+		Product product = null;
+		try {
+			setCon();
+			String sql = "SELECT * FROM PRODUCTS \n"
+					+ "WHERE product_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				 product = new Product(rs.getString("product_name"),rs.getInt("product_id"),rs.getString("product_category"),
+							rs.getInt("product_price"),rs.getInt("product_stock"),rs.getInt("product_rate"),rs.getString("product_img_src")
+							);
+				 System.out.println(product.getProduct_name());
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB에러: "+e.getMessage());
+		} catch( Exception e) {
+			System.out.println("일반에러: "+e.getMessage());
+		}
+		return product;
+	}
+
+	public void updateProduct(Product upt){
+		// 1. 접속 autocommit(false) 
+		try {
+			setCon();
+			con.setAutoCommit(false);
+		// 2. 대화
+			String sql = "UPDATE PRODUCTS \n"
+					+ "SET \n"
+					+ "  product_name = ?,\n"
+					+ "   product_id =?,\n"
+					+ "   product_category =?,\n"
+					+ "   product_price =?,\n"
+					+ "   product_stock =?,\n"
+					+ "   product_rate =?,\n"
+					+ "   product_img_src =?\n"
+					+ "WHERE product_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, upt.getProduct_name());
+			pstmt.setInt(2, upt.getProduct_id());
+			pstmt.setString(3, upt.getProduct_category());
+			pstmt.setInt(4, upt.getProduct_price());
+			pstmt.setInt(5, upt.getProduct_stock());
+			pstmt.setInt(6, upt.getProduct_rate());
+			pstmt.setString(7, upt.getProduct_img_src());
+			pstmt.setInt(8, upt.getProduct_id());
+			pstmt.executeUpdate();
+			System.out.println("#sql: "+sql);
+		// 3. commit 
+			con.commit();
+			pstmt.close();
+			con.close();
+		
+			
+		// 4. 예외처리 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB처리에러: "+e.getMessage());
+			try {
+				con.rollback();
+				System.out.println("에러발생으로 원복처리");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("rollback에 문제발생");
+			}
+		} catch(Exception e) {
+			System.out.println("일반에러: "+e.getMessage());
+		}
+	}
+
+
+	public ArrayList<Purchase> searchPurchase(String customer_id){  //overloading
+		ArrayList<Purchase> list = new ArrayList<Purchase>(); 
+	//	1. 공통연결메서드 호출 
+		try {
+			setCon();
+	//	2. Statement 객체 생성 (연결객체-Connection) 
+			String sql = "SELECT * FROM PURCHASE_RECORD \n"
+					+ "WHERE purchase_step='구매완료'\n"
+					+ "AND customer_id LIKE '%'||?||'%'\n"
+					+ "ORDER BY purchase_step_date desc";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, customer_id);
+			
+	//	3. ResultSet 객체 생성 (대화객체-Statement) 
+			rs = pstmt.executeQuery();
+			
+			int cnt = 1; 
+			while(rs.next()) {
+				// 1.객체 생성과 할당 
+				// String customer_id, int purchase_id, String product_name, int product_id, String purchase_step,
+				// Date purchase_step_date
+				Purchase p = new Purchase(rs.getString("customer_id"),rs.getInt("purchase_id"),rs.getString("product_name"),
+						rs.getInt("product_id"),rs.getString("purchase_step"),rs.getDate("purchase_step_date")); 
+				// 2. ArrayList에 할당 
+				list.add(p);
+			}
+			System.out.println("객체의 갯수: "+list.size());
+			System.out.println("두번째 데이터: "+list.get(1).getProduct_name());
+	
+	//	4. 자원의 해제 
+			rs.close();
+			pstmt.close();
+			con.close();
+	//	5. 예외 처리 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB관련에러");
+			System.out.println(e.getMessage());
+		}catch(Exception e) {
+			System.out.println("기타에러");
+			System.out.println(e.getMessage());
+		}
+		return list; 
+	}
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DAO_admin dao = new DAO_admin();
-		dao.searchProduct("","");
+		dao.searchPurchase("test");
 	}
 
 }

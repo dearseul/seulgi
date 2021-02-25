@@ -63,14 +63,16 @@ String path = request.getContextPath();
 			<div id="tab_title">공지사항</div>
 			<div id="reg_ann"><input id="reg_button" type="button" value="글쓰기" onclick="location.href='announce_write.jsp'"></div>
 			<tr><th>번호</th><th>제목</th><th>작성일자</th><th>작성자</th><th>조회수</th><th>수정</th></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
-			<tr><td>10</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>400</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>10</td><td>상품공지</td><td>2019/02/03</td><td>관리자</td><td>446</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>9</td><td>상품입고공지</td><td>2019/02/03</td><td>관리자</td><td>234</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>8</td><td>전체공지</td><td>2019/02/03</td><td>관리자</td><td>222</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>7</td><td>배송공지</td><td>2019/02/03</td><td>관리자</td><td>542</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>6</td><td>전체공지</td><td>2019/02/03</td><td>관리자</td><td>123</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>5</td><td>상품공지</td><td>2019/02/03</td><td>관리자</td><td>155</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>4</td><td>상품공지</td><td>2019/02/03</td><td>관리자</td><td>122</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>3</td><td>전체공지</td><td>2019/02/03</td><td>관리자</td><td>62</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>2</td><td>배송지연공지</td><td>2019/02/03</td><td>관리자</td><td>64</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
+			<tr><td>1</td><td>배송지연공지</td><td>2019/02/03</td><td>관리자</td><td>73</td><td><input type="button" value="수정" onclick="location.href='announce_modify.jsp'"></td></tr>
 		</table>
 	</div>
 </body>

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
     import="java.util.*"
     import="jspexp.z01_vo.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
 %>
@@ -32,7 +34,6 @@ String path = request.getContextPath();
 	border:1px solid black;	
 }
 #prod_tab td{
-
 	vertical-align:middle;
 }
 
@@ -47,8 +48,12 @@ String path = request.getContextPath();
 	padding-left:130px;
 	padding-bottom:20px;
 }
-#submit{
+#submit1{
 	width:50px;
+	height:30px;
+}
+#toproductpage{
+	widgh:100px;
 	height:30px;
 }
 #button{
@@ -59,26 +64,44 @@ String path = request.getContextPath();
 
 </head>
 <body>
+<jsp:useBean id="dao" class="project.dao_admin.DAO_admin"></jsp:useBean>
+<jsp:useBean id="produpt" class="project.vo_admin.Product"></jsp:useBean>
+<jsp:setProperty property="*" name="produpt"></jsp:setProperty>
+<c:set var="prod" value="${dao.getProduct(param.product_id)}"></c:set>
+<c:if test="${param.proc=='upt'}">${dao.updateProduct(produpt)}</c:if>
+
 	<div id="content">
 		<div id="product_detail">
-			<div id="prod_text">상품정보상세</div>
-			<form>
+			<div id="prod_text">상품정보상세[상품ID: ${param.product_id}]</div>
+			<form method="post" id="frm">
 				<table id="prod_tab">
-					<tr><th>카테고리</th><td><input id="input_category" type="text" name="category"></td></tr>
-					<tr><th>상품ID</th><td><input id="input_pid" type="text" name="pid"></td></tr>
-					<tr><th>상품명</th><td><input id="input_pname" type="text" name="pname"></td></tr>
-					<tr><th>가격</th><td><input id="input_price" type="text" name="price"></td></tr>
-					<tr><th>중량</th><td><input id="input_weight" type="text" name="weight"></td></tr>
-					<tr><th>용량</th><td><input id="input_capacity" type="text" name="capacity"></td></tr>
-					<tr><th>포장타입</th><td><input id="input_wrap" type="text" name="wrap"></td></tr>
-					<tr><th>이미지경로</th><td><input id="input_img" type="text" name="img"></td></tr>
-					<tr><th>재고</th><td><input id="input_stock" type="text" name="stock"></td></tr>
-					<tr><th>등록일</th><td><input id="input_regdate" type="text" name="regdate"></td></tr>
-					<tr><th id="button" colspan="2"><input id="submit" type="button" value="수정" onclick="location.href='product_modify.jsp'"></th></tr>
+					<input type="hidden" name="proc" value="">
+					<tr><th>카테고리</th><td><input id="input_pid" name="product_category" value="${param.product_category==null?prod.product_category:param.product_category}"></td></tr>
+					<tr><th>상품ID</th><td><input id="input_pid" name="product_id" value="${param.product_id==null?prod.product_id:param.product_id}"></td></tr>
+					<tr><th>상품명</th><td><input id="input_pid" name="product_name" value="${param.product_name==null?prod.product_name:param.product_name}"></td></tr>
+					<tr><th>가격</th><td><input id="input_pid" name="product_price" value="${param.product_price==null?prod.product_price:param.product_price}"></td></tr>
+					<tr><th>재고</th><td><input id="input_pid" name="product_stock" value="${param.product_stock==null?prod.product_stock:param.product_stock}"></td></tr>
+					<tr><th>판매량</th><td><input id="input_pid" name="product_rate" value="${param.product_rate==null?prod.product_rate:param.product_rate}"></td></tr>
+					<tr><th>이미지경로</th><td><input id="input_pid" name="product_img_src" value="${param.product_img_src==null?prod.product_img_src:param.product_img_src}"></td></tr>
+					<tr><th id="button" colspan="2">
+						<input id="submit1" type="button" value="수정" onclick="upt();">
+						<input id="toproductpage" type="button" value="상품조회" onclick="location.href='admin01.jsp?pageChange=product.jsp'">
+						</th></tr>
 				</table>
 			</form>
 		</div>
 	</div>
-
 </body>
+<script type="text/javascript">
+function upt(){
+	document.querySelector("[name=proc]").value="upt";
+	document.querySelector("#frm").submit();
+	alert("상품수정완료");
+}
+</script>
 </html>
+
+
+
+
+

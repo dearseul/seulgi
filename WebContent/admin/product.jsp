@@ -83,11 +83,16 @@ String path = request.getContextPath();
 		<table id="tab_prod">
 			<tr><th>카테고리</th><th>상품ID</th><th>상품명</th><th>가격</th><th>재고</th><th>상세/수정</th></tr>
 			<c:forEach var="product" items="${pro}">
-			<tr><td>${product.product_category}</td><td>${product.product_id}</td><td>${product.product_name}</td><td>${product.product_price}</td><td>${product.product_stock}</td><td><input type="button" value="상세" onclick="location.href='product_detail.jsp'"><input type="button" value="수정" onclick="location.href='product_modify.jsp'"></td></tr>
+			<tr><td>${product.product_category}</td><td>${product.product_id}</td><td>${product.product_name}</td><td>${product.product_price}</td><td>${product.product_stock}</td><td><input type="button" value="상세/수정" onclick="detail('${product.product_id}')"></td></tr>
 			</c:forEach>
 		</table>
 	</div>
 </body>
+<script>
+function detail(product_id){
+	location.href="product_detail.jsp?product_id="+product_id;
+}
+</script>
 </html>
 
 

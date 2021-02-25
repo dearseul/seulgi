@@ -63,11 +63,11 @@ String path = request.getContextPath();
 			<div id="tab_title">문의게시판</div>
 			<div id="reg_qanda"><input id="reg_button" type="button" value="글쓰기" onclick="location.href='qanda_write.jsp'"></div>
 			<tr><th>문의ID</th><th>분류</th><th>제목</th><th>작성자ID</th><th>작성일자</th><th>상태</th><th>상세/답글</th></tr>
-			<tr><td>1234</td><td>@@</td><td>@@@</td><td>hong</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
-			<tr><td>1234</td><td>@@</td><td>@@@</td><td>hong</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
-			<tr><td>1234</td><td>@@</td><td>@@@</td><td>hong</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
-			<tr><td>1234</td><td>@@</td><td>@@@</td><td>hong</td><td>2021/02/03</td><td>답변완료</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
-			<tr><td>1234</td><td>@@</td><td>@@@</td><td>hong</td><td>2021/02/03</td><td>답변완료</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
+			<tr><td>1005</td><td>상품문의</td><td>상품문의</td><td>hong</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
+			<tr><td>1004</td><td>상품문의</td><td>상품</td><td>himan</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
+			<tr><td>1003</td><td>배송문의</td><td>배송출발</td><td>hiboy</td><td>2021/02/03</td><td>미답변</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
+			<tr><td>1002</td><td>배송문의</td><td>배송언제</td><td>gilgil</td><td>2021/02/03</td><td>답변완료</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
+			<tr><td>1001</td><td>기타문의</td><td>사이즈</td><td>leelee</td><td>2021/02/03</td><td>답변완료</td><td><input type="button" value="상세" onclick="location.href='qanda_detail.jsp'"><input type="button" value="답글" onclick="location.href='qanda_reply.jsp'"></td></tr>
 		</table>
 	</div>
 </body>
