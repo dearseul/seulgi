@@ -77,6 +77,10 @@ if(!customer_id.equals("")){
 %>
 
 <body class="body-board body-popup-goods-board-write pc">
+
+
+
+
 <input type="hidden" name="review_written_date_s" value="<%=review_written_date_s %>" >
 <div class="board_write_popup">
     <div class="ly_tit">
@@ -151,7 +155,7 @@ if(!customer_id.equals("")){
             <!-- //scroll_box -->
         <div class="btn_center_box">
             <a href="javascript:window.close()"><button class="btn_ly_cancel"><strong>취소</strong></button></a>
-            <a href=''><button id="btn">저장</button></a>
+            <a href=''><button id="btn" >저장</button></a>
         </div>
     </div>
     </form>

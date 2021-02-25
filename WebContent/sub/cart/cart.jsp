@@ -255,11 +255,8 @@
             }
       };
       
-      function result(){
-         <%-- 
-         session.setAttribute("pw",pass);
-         response.sendRedirect("../../admin/admin01.jsp");
-         --%>
+      function isNumeric(data){
+         return !isNaN(data);
       }
 </script>
 <body>
@@ -393,6 +390,10 @@
                                                                            var cnt = document.getElementById("eventObj<%=i%>");
                                                                            cntcnt[<%=i%>] = Number(cnt.value);
                                                                            
+                                                                           if(!isNumeric(cnt.value))
+                                                                              alert("숫자입력!!");
+                                                                           else {
+                                                                           
                                                                            //cnt 도 보내야함
                                                                            var each_total = Number(price) * Number(cnt.value);
                                                                            
@@ -411,6 +412,7 @@
                                                                            
                                                                            var product_subtotal_price = document.querySelector("#sub_price<%=i%>");
                                                                            product_subtotal_price.innerHTML = each_total;
+                                                                           }
                                                                         }
                                                                          
                                                                          
@@ -477,23 +479,30 @@
                            <div class="order">
                               <a <%--href="payment_page.jsp"--%>><button class="order_bt" type="button" id="finish">구매하기</button></a>
                               <script>
+                                 var che = false;
                                  finish.onclick = function(){
                                     var j = 0; // checked 된 버튼 인덱스
                                     var address="";
+                                    
                                     const checked = document.querySelectorAll('input[name="select_bt"]');
                                     checked.forEach((check) => {
                                        if(check.checked == true){
                                           console.log('j: ' +  j);
                                           console.log('cnt=' +  cntcnt[j]);
                                           address += "cnt="+cntcnt[j]+"&";
+                                          che = true;
                                        }
                                        // 마지막 번호만 넘어가짐, 배열을 넘기는 방법 강구
                                        
                                        j++;
                                     })
-                                    console.log("address: " + "?" + address);
-                                    console.log('z: ' + z);
-                                    location.href="payment_page.jsp?"+ address;
+                                    if(!che)
+                                       alert("선택된 물품이 없습니다.");
+                                    else {
+                                       console.log("address: " + "?" + address);
+                                       console.log('z: ' + z);
+                                       location.href="payment_page.jsp?"+ address;
+                                    }
                                  }
                                  <%--
                                  delbt<%=i%>.onclick = function(){
