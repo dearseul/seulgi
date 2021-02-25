@@ -91,7 +91,7 @@ String customer_id = (String)session.getAttribute("id");
 
         <section class="left-profile">
             <div class="wrap-name">
-                <h2><span class="user-name"><%=customer_id %></span>님 안녕하세요</h2>
+                <h2><span class="user-name">이탁구</span>님 안녕하세요</h2>
             </div>
             <div class="wrap-img-profile">
                 <img class="img-profile" src="<%=path%>/images/img_profile.png" alt="">
@@ -119,64 +119,60 @@ String customer_id = (String)session.getAttribute("id");
 		    <c:set var="plist" value="${daop.getMyPro(customer_id) }"></c:set>
 			<% log(customer_id); 
 			%>
-    <caption style="text-align:left;">총건수:${plist.size()}</caption>
-         <c:forEach var="pr" items="${plist}">
+
             <div class="box-order">
-                <div class="date-order"><span class="date-order-v">${pr.purchase_step_date}</span>주문</div>
+                <div class="date-order"><span class="date-order-v">2021.02.26</span>주문</div>
                 <div class="order-detail">
-                    <div class="status-order">${pr.purchase_step}<span class="date-arrive">1/16 도착</span></div>
+                    <div class="status-order">구매완료<span class="date-arrive"></span></div>
                     <div class="prod-order">
-                        <a href="NewFile.jsp"><img class="img-order" src="<%=path%>/images/list_img2.jpg" alt=""></a>
+                        <a href="NewFile.jsp"><img class="img-order" src="<%=path%>/images/detail_img2.jpg" alt=""></a>
                         <div class="text-order">
-                            <p class="prod-name">${pr.product_name}</p>
-                            <p class="order-price">9000원</p><p class="order-cnt">1개</p>
+                            <p class="prod-name">볼볼홈파티 그릇</p>
+                            <p class="order-price">40000원</p><p class="order-cnt">2개</p>
                         </div>
                     </div>
                 </div>
                 <div class="wrap-btn-order">
                     <button class="btn-order on">배송조회</button>
-                    <button class="btn-order">교환, 반품 신청</button>
-                    <a href="goodsReview.jsp"><button class="btn-order">구매후기 쓰기</button></a>
-                    <a href="goodsQuestion.jsp"><button class="btn-order">판매자 문의하기</button></a>
+                    <a href="<%=path %>/sub/Product/goodsReview.jsp"><button class="btn-order">구매후기 쓰기</button></a>
+                    <a href="<%=path %>/sub/Product/goodsQuestion.jsp"><button class="btn-order">판매자 문의하기</button></a>
                 </div>
             </div>
-       	</c:forEach>
-            <div class="box-order">
-                <div class="date-order"><span class="date-order-v">2021.01.14</span>주문</div>
+
+                        <div class="box-order">
+                <div class="date-order"><span class="date-order-v">2021.02.26</span>주문</div>
                 <div class="order-detail">
-                    <div class="status-order">배송완료<span class="date-arrive">1/16 도착</span></div>
+                    <div class="status-order">구매완료<span class="date-arrive"></span></div>
                     <div class="prod-order">
-                        <img class="img-order" src="<%=path%>/images/list_img2.jpg" alt="">
+                        <a href="NewFile.jsp"><img class="img-order" src="<%=path%>/images/detail_img3.jpg" alt=""></a>
                         <div class="text-order">
-                            <p class="prod-name">커클랜드 베이글 어니언</p>
-                            <p class="order-price">9000원</p><p class="order-cnt">1개</p>
+                            <p class="prod-name">볼볼홈파티 주병세트</p>
+                            <p class="order-price">8700원</p><p class="order-cnt">1개</p>
                         </div>
                     </div>
                 </div>
                 <div class="wrap-btn-order">
                     <button class="btn-order on">배송조회</button>
-                    <button class="btn-order">교환, 반품 신청</button>
-                    <button class="btn-order">구매후기 쓰기</button>
-                    <button class="btn-order">판매자 문의하기</button>
+                    <a href="<%=path %>/sub/Product/goodsReview.jsp"><button class="btn-order">구매후기 쓰기</button></a>
+                    <a href="<%=path %>/sub/Product/goodsQuestion.jsp"><button class="btn-order">판매자 문의하기</button></a>
                 </div>
             </div>
-            <div class="box-order">
-                <div class="date-order"><span class="date-order-v">2021.01.14</span>주문</div>
+                    <div class="box-order">
+                <div class="date-order"><span class="date-order-v">2021.02.26</span>주문</div>
                 <div class="order-detail">
-                    <div class="status-order">배송완료<span class="date-arrive">1/16 도착</span></div>
+                    <div class="status-order">구매완료<span class="date-arrive"></span></div>
                     <div class="prod-order">
-                        <img class="img-order" src="<%=path%>/images/list_img2.jpg" alt="">
+                        <a href="NewFile.jsp"><img class="img-order" src="<%=path%>/images/bowl06.jpg" alt=""></a>
                         <div class="text-order">
-                            <p class="prod-name">커클랜드 베이글 어니언</p>
+                            <p class="prod-name">그릇6</p>
                             <p class="order-price">9000원</p><p class="order-cnt">1개</p>
                         </div>
                     </div>
                 </div>
                 <div class="wrap-btn-order">
                     <button class="btn-order on">배송조회</button>
-                    <button class="btn-order">교환, 반품 신청</button>
-                    <button class="btn-order">구매후기 쓰기</button>
-                    <button class="btn-order">판매자 문의하기</button>
+                    <a href="<%=path %>/sub/Product/goodsReview.jsp"><button class="btn-order">구매후기 쓰기</button></a>
+                    <a href="<%=path %>/sub/Product/goodsQuestion.jsp"><button class="btn-order">판매자 문의하기</button></a>
                 </div>
             </div>
         </section>

@@ -78,7 +78,7 @@
     <div id="category">
         <section class="menu-left">
             <ul class="list-category">
-                <li class="menu-click">
+                <li class="menu-click on">
                     <div class="title-list-menu"><a href="#">주방</a><img src="" alt=""></div>
                     <ul class="sub-list">
                         <li>

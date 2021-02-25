@@ -59,7 +59,7 @@
                               <li class="menu none_sub menu_join"><a href="<%=path %>/sub/join/login.jsp" class="login_text">로그인</a></li>
                               <li class="menu none_sub"><a href="<%=path %>/sub/join/signUp.jsp" class="login_text">회원가입</a></li>
                              <%} else {%> 
-                             <li class="menu none_sub menu_join"><a href="<%=path %>/sub/mypage/mypage.jsp" class="login_text"><%=customer_id %></a></li>
+                             <li class="menu none_sub menu_join"><a href="<%=path %>/sub/mypage/mypage.jsp" class="login_text"><%=customer_id %>님</a></li>
                              <li class="menu none_sub"><a href="<%=path %>/sub/join/logout.jsp" class="login_text">로그아웃</a></li>
                              <%} %>
                            </ul>
@@ -89,13 +89,13 @@
                            <li class="dropdown">
                               <div class="dropdown-menu"><a href="<%=path%>/sub/category/category.jsp">전체카테고리</a></div>
                               <div class="dropdown-content">
-                                 <a href="dish1.jsp">dish1</a>
-                                 <a href="dish2.jsp">dish2</a>
-                                 <a href="dish3.jsp">dish3</a>
-                                 <a href="dish4.jsp">dish4</a>
-                                 <a href="dish5.jsp">dish5</a>
-                                 <a href="dish6.jsp">dish6</a>
-                                 <a href="dish7.jsp">dish7</a>
+                                 <a href="dish1.jsp">주방</a>
+                                 <a href="dish2.jsp">가구</a>
+                                 <a href="dish3.jsp">패브릭</a>
+                                 <a href="dish4.jsp">홈데코/조명</a>
+                                 <a href="dish5.jsp">가전</a>
+                                 <a href="dish6.jsp">수납정리</a>
+                                 <a href="dish7.jsp">생활</a>
                               </div>
                            </li>
                            <li class="dropdown">
