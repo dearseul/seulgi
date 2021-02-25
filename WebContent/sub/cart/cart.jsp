@@ -383,18 +383,20 @@
                                                             <div class="product_quantity_change">
                                                                <div class="quantity">
                                                                   <div class="option_count">
-                                                                     <input type="text" id="eventObj<%=i%>" value="1" style="width: 80px;padding-left: 2px;border-left-width: 2px;"/><br>
+                                                                     <input type="number" id="eventObj<%=i%>" value="1" style="width: 80px;padding-left: 2px;border-left-width: 2px;"/><br>
                                                                       <script>
                                                                          eventObj<%=i%>.onblur = function(){
                                                                            var price = <%=product_list.get(i).getProduct_price() %>;
                                                                            var cnt = document.getElementById("eventObj<%=i%>");
                                                                            cntcnt[<%=i%>] = Number(cnt.value);
                                                                            
-                                                                           if(!isNumeric(cnt.value))
+                                                                           if(!isNumeric(cnt.value)){
                                                                               alert("숫자입력!!");
+                                                                              cntcnt[<%=i%>] = 1;
+                                                                           }
                                                                            else {
                                                                            
-                                                                           //cnt 도 보내야함
+                                                                           
                                                                            var each_total = Number(price) * Number(cnt.value);
                                                                            
                                                                            // if(checked){ 실행 }
