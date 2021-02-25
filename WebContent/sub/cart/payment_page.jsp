@@ -28,7 +28,7 @@
 	   </div>
 	</div>
 	<div id="pay-container">
-		<form method="post">
+		<form method="post" id="form">
 			
 		<table id="pay-List">
 			<col width="10%"><col width="20%"><col width="30%"><col width="10%">
@@ -38,6 +38,8 @@
 				String[] cnts =  request.getParameterValues("cnt");
 			//카운트값을 받지못하면 에러가 나고, 임의로 cnt=i&cnt=i를 넣어야 작동
 				int[] count = new int[90];
+				String y = request.getParameter("pno");
+				log("########"+y);
 				for(int i=0; i<cnts.length;i++){
 					count[i] = Integer.parseInt(cnts[i]);
 				}
@@ -45,7 +47,7 @@
 				for(int i=0; i<paylist.size(); i++){
 					total+=count[i]*paylist.get(i).getProduct_price();
 			%>
-			<input type="hidden" name="pno" value="<%=paylist.get(i).getPurchase_id() %>" />
+			<input type="hidden" name="pno" value="<%=paylist.get(i).getPurchase_id() %>"/>
 			<tr>
 				<td><%=i+1 %></td>
 				<td><img src="<%=path%>/<%=paylist.get(i).getProduct_img_src()%>"/></td>
@@ -71,12 +73,15 @@
 			</div>
 		</div>
 	</div>
+</body>
 	<script type="text/javascript">
-	function sendPay(){
-		document.querySelector("form").action="update.jsp";
-		document.querySelector("form").submit();
-	}
+		function sendPay(){
+<%-- 			document.querySelector("[name=pno]").value="<%=paylist.get(i).getPurchase_id() %>"; --%>
+			document.querySelector("form").action="update.jsp";
+			document.querySelector("form").submit();
+		}
+		
+	
 		
 	</script>
-</body>
 </html>

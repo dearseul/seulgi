@@ -73,6 +73,7 @@
       product_list.add(product_dao.getProduct(prlist.get(i).getProduct_name(),prlist.get(i).getProduct_id()));
    }
    
+   
    // 삭제 누르면 confirm 뜨고 예 클릭 시 정보가 넘어가야함
    if(proc!=null){
          if(proc.equals("del")){
@@ -102,6 +103,7 @@
            <% 
               int[] arr = new int[prlist.size()];
               for(int i=0;i<prlist.size();i++){
+                 System.out.println("??: " + product_list.get(i).getProduct_price());
                  result_price += product_list.get(i).getProduct_price();
                  total_price += product_list.get(i).getProduct_price();
                  arr[i] = product_list.get(i).getProduct_price();
@@ -482,26 +484,27 @@
                                     checked.forEach((check) => {
                                        if(check.checked == true){
                                           console.log('j: ' +  j);
-                                          console.log('cntcnt[j]: ' +  cntcnt[j]);
+                                          console.log('cnt=' +  cntcnt[j]);
                                           address += "cnt="+cntcnt[j]+"&";
                                        }
                                        // 마지막 번호만 넘어가짐, 배열을 넘기는 방법 강구
                                        
                                        j++;
                                     })
-                                    console.log("address: " + address);
+                                    console.log("address: " + "?" + address);
                                     console.log('z: ' + z);
+                                    location.href="payment_page.jsp?"+ address;
                                  }
                                  <%--
                                  delbt<%=i%>.onclick = function(){
-                                   if(confirm("삭제하시겠습-니까?")){
+                                   if(confirm("삭제하시겠습니까?")){
                                       document.querySelector("[name=proc]").value="del";
                                       document.querySelector("[name=prodname]").value="<%=product_list.get(i).getProduct_name()%>";
                                       document.querySelector("[name=prodid]").value="<%=product_list.get(i).getProduct_id()%>";
                                        
                                    }
                                   };
-                                  --%>
+                                 --%>
                               </script>
                            </div>
                         </div>

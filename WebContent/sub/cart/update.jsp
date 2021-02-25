@@ -8,11 +8,16 @@
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
    Dao_payment_page paydao = new Dao_payment_page();
+   log("###update");
    String [] pno = request.getParameterValues("pno"); 
+   log("###update : "+(pno==null));
+   
    if(pno!=null){
+	   log("###update"+(pno.length));
 	   int [] pnoS = new int[pno.length];
 	   for(int i = 0; i<pno.length; i++){
 		   pnoS[i]=Integer.parseInt(pno[i]);
+		   log("###"+pnoS[i]);
 		   paydao.updateStep(pnoS[i]);
 	   }
    }
