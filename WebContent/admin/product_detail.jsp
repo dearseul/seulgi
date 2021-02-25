@@ -53,7 +53,7 @@ String path = request.getContextPath();
 	height:30px;
 }
 #toproductpage{
-	widgh:100px;
+	width:70px;
 	height:30px;
 }
 #button{
@@ -69,6 +69,8 @@ String path = request.getContextPath();
 <jsp:setProperty property="*" name="produpt"></jsp:setProperty>
 <c:set var="prod" value="${dao.getProduct(param.product_id)}"></c:set>
 <c:if test="${param.proc=='upt'}">${dao.updateProduct(produpt)}</c:if>
+<c:if test="${param.proc=='del'}">${dao.deleteProduct(prod.product_id)}
+<script>if(confirm("삭제완료\n상품조회페이지로 이동합니다.")){location.href="admin01.jsp?pageChange=product.jsp"}</script></c:if>
 
 	<div id="content">
 		<div id="product_detail">
@@ -85,6 +87,7 @@ String path = request.getContextPath();
 					<tr><th>이미지경로</th><td><input id="input_pid" name="product_img_src" value="${param.product_img_src==null?prod.product_img_src:param.product_img_src}"></td></tr>
 					<tr><th id="button" colspan="2">
 						<input id="submit1" type="button" value="수정" onclick="upt();">
+						<input id="submit1" type="button" value="삭제" onclick="del1();">
 						<input id="toproductpage" type="button" value="상품조회" onclick="location.href='admin01.jsp?pageChange=product.jsp'">
 						</th></tr>
 				</table>
@@ -98,6 +101,14 @@ function upt(){
 	document.querySelector("#frm").submit();
 	alert("상품수정완료");
 }
+function del1(){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		document.querySelector("[name=proc]").value="del";
+		document.querySelector("#frm").submit();
+	}
+}
+
+
 </script>
 </html>
 

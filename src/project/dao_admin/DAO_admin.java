@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -123,7 +124,8 @@ public class DAO_admin {
 		//	2. Statement 객체 생성 (연결객체-Connection) 
 				String sql = "SELECT * FROM products \n"
 						+ "WHERE product_name LIKE '%'||?||'%'\n"
-						+ "AND product_category LIKE '%'||?||'%'";
+						+ "AND product_category LIKE '%'||?||'%'\n"
+						+ "ORDER BY product_id DESC";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, product_name);
 				pstmt.setString(2, product_category);
@@ -288,12 +290,96 @@ public class DAO_admin {
 		}
 		return list; 
 	}
-
+// INSERT INTO PRODUCTS VALUES(?,products_seq.nextVal,?,?,?,?,?)
+/*
+ *  product_name varchar2(50),
+   product_id NUMBER,
+   product_category varchar2(30),
+   product_price NUMBER,
+   product_stock NUMBER,
+   product_rate NUMBER,
+   product_img_src varchar2(300)
+ */
+	public void insertProduct(Product ins){
+		// 1. 접속 autocommit(false) 
+		try {
+			setCon();
+			con.setAutoCommit(false);
+		// 2. 대화
+			String sql = "INSERT INTO PRODUCTS VALUES(?,products_seq.nextVal,?,?,?,?,?)";
+			System.out.println("#sql: "+sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,ins.getProduct_name());
+			pstmt.setString(2, ins.getProduct_category());
+			pstmt.setInt(3, ins.getProduct_price());
+			pstmt.setInt(4, ins.getProduct_stock());
+			pstmt.setInt(5, ins.getProduct_rate());
+			pstmt.setString(6, ins.getProduct_img_src());
+			pstmt.executeUpdate();
+		// 3. commit 
+			con.commit();
+			pstmt.close();
+			con.close();
+			
+		// 4. 예외처리 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB처리에러: "+e.getMessage());
+			try {
+				con.rollback();
+				System.out.println("에러발생으로 원복처리");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("rollback에 문제발생");
+			}
+		} catch(Exception e) {
+			System.out.println("일반에러: "+e.getMessage());
+		}
+	}
+	
+	public void deleteProduct(int product_id){
+		// 1. 접속 autocommit(false) 
+		try {
+			setCon();
+			con.setAutoCommit(false);
+		// 2. 대화
+			String sql = "DELETE FROM products WHERE product_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_id);
+			
+			pstmt.executeUpdate();
+			System.out.println("#sql: "+sql);
+		// 3. commit 
+			con.commit();
+			pstmt.close();
+			con.close();
+		
+			
+		// 4. 예외처리 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB처리에러: "+e.getMessage());
+			try {
+				con.rollback();
+				System.out.println("에러발생으로 원복처리");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("rollback에 문제발생");
+			}
+		} catch(Exception e) {
+			System.out.println("일반에러: "+e.getMessage());
+		}
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DAO_admin dao = new DAO_admin();
-		dao.searchPurchase("test");
+		// 그릇1   |         1|그릇/홈세트          |         5000|           10|          16|images/detail_img3.jpg
+		dao.insertProduct(new Product("그릇10",0,"그릇/홈세트",5000,10,16,"images/detail_img3.jpg"));
 	}
 
 }
