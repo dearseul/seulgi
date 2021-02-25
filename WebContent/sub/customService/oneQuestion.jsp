@@ -74,13 +74,12 @@ Sat, Sun, Holiday OFF<br>
 </div>
 <!-- //info_box -->
 <script type="text/javascript">
-    // 메뉴 선택
-    $('.sub_menu li > a[href*="' + document.location.pathname + '"]').addClass('active');
+
 </script>
                 </div>
                 <!-- //side_cont -->
 <div class="content">
-    <iframe src="oneQuestionIframe.jsp" name="ifrmBoard" width="100%" height="1157" marginwidth="0" marginheight="0" frameborder="no" scrolling="no" onload="gd_resize_frame(this)"></iframe>
+    <iframe src="oneQuestionIframe.jsp" name="ifrmBoard" width="100%" height="1157" ></iframe>
 </div>
             </div>
             <!-- //sub_content -->

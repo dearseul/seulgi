@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="project.vo_review.*"
+    import="project.dao_review.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
@@ -68,8 +71,44 @@
     cursor: pointer;
 }
 </style>
+<script>
+	
+</script>
 </head>
-
+<%--
+	private String customer_id;
+	private int question_id;
+	private String question_kind;
+	private String question_writer;
+	private String question_title;
+	private String question_content;
+ --%>
+<%
+String question_kind = request.getParameter("question_kind");
+if(question_kind==null) question_kind="";
+String question_writer = request.getParameter("question_writer");
+if(question_writer==null) question_writer="";
+String question_title = request.getParameter("question_title");
+if(question_title==null) question_title="";
+String question_content = request.getParameter("question_content");
+if(question_content==null) question_content="";
+log("#분류:"+question_kind);
+log("#작성자:"+question_writer);
+log("#제목:"+question_title);
+log("#내용:"+question_content);
+/*
+String customer_id, int question_id, String question_kind, 
+String question_writer,
+			String question_title, String question_content
+*/
+if(!question_writer.equals("")){
+	Question ins = new Question("aaa123",0,question_kind,
+			question_writer,question_title,question_content);
+	log("입력내용 확인:"+ins.getQuestion_writer());
+	DAO_question dao = new DAO_question();
+	dao.insertQuestion(ins);
+}
+%>
 <body class="body-board body-write pc">
 <div class="content">
 <div class="board_zone_sec">
@@ -77,13 +116,7 @@
 		<h2>1:1문의</h2>
 	</div>
 	<div class="board_zone_cont">
-		<form name="frmWrite" id="frmWrite" method="post">
-			<input type="hidden" name="bdId" value="qa">
-			<input type="hidden" name="sno" value="">
-			<input type="hidden" name="mode" value="write">
-			<!--<input type="hidden" name="chkSpamKey" id="chkSpamKey">-->
-			<input type="hidden" name="returnUrl" value="bdId=qa&amp;noheader=y&amp;memNo=">
-
+		<form method="post">
 			<div class="board_zone_write">
 				<div class="board_write_box">
 					<table class="board_write_table">
@@ -96,7 +129,7 @@
 							<th scope="row">말머리</th>
 							<td>
 								<div class="category_select">
-									<select class=" tune" id="category" name="category" style="width: 127px;">
+									<select class=" tune" id="category" name="question_kind" style="width: 127px;">
 										<option value="회원/정보관리">회원/정보관리</option>
 										<option value="주문/결제">주문/결제</option>
 										<option value="배송">배송</option>
@@ -111,45 +144,24 @@
 						<tr>
 							<th scope="row">작성자</th>
 							<td>
-								<input id="writerNm" type="text" class="text" name="writerNm" value="" >
+								<input id="writerNm" type="text" class="text" name="question_writer" value="<%=question_writer %>" >
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">비밀번호</th>
-							<td><input type="password" class="text" name="writerPw" ></td>
-						</tr>
-						<tr>
 							<th scope="row">제목
-							</th><td><input type="text" name="subject" value="" ></td>
+							</th><td><input type="text" name="question_title" value="<%=question_title %>" ></td>
 						</tr>
 						<tr>
 							<th scope="row">본문</th>
 							<td class="write_editor">
 								<div class="form_element">
-									<em>해당글은 비밀글로만 작성이 됩니다.</em>
 									<br>
 								</div>
 								<div>
-								<textarea id="editor" name="contents" cols="30" rows="10" style="width:600px;" ></textarea>
+								<textarea id="editor" name="question_content" cols="30" rows="10" style="width:600px;" >
+								<%=question_content %>
+								</textarea>
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">첨부파일</th>
-							<td id="uploadBox">
-
-
-								<div class="file_upload_sec">
-									<label for="attach1">
-										<input type="text" class="file_text" title="파일 첨부하기" readonly="readonly">
-									</label>
-									<div class="btn_upload_box">
-										<button type="button" class="btn_upload" title="찾아보기"><em>찾아보기</em></button>
-										<input type="file" id="attach1" name="upfiles[]" class="file" title="찾아보기">
-										<span class="btn_gray_list"><button type="button" id="addUploadBtn" class="btn_gray_big"><span>+ 추가</span></button></span>
-									</div>
-								</div>
-
 							</td>
 						</tr>
 						</tbody>
@@ -159,8 +171,7 @@
 			</div>
 			<!-- //board_zone_write -->
 			<div class="btn_center_box">
-				<button type="button" class="btn_before" onclick="javascript:history.back()"><strong>이전</strong></button>
-				<button type="submit" class="btn_write_ok" onclick="save()"><strong>저장</strong></button>
+				<input type="submit" value="저장" class="btn_write_ok" onclick="save()">
 			</div>
 
 		</form>
@@ -174,20 +185,20 @@
 </body>
 <script>
 
-var form = document.querySelector("#frmWrite");
+var form = document.querySelector("form");
 function save(){
-	if(form.writerNm.value==""){
+	if(form.question_writer.value==""){
 		alert('작성자를 입력하세요.');
-	}else if(form.writerPw.value==""){
-		alert('비밀번호를 입력하세요.');
-	}else if(form.subject.value==""){
+	}else if(form.question_title.value==""){
 		alert('제목을 입력하세요.');
-	}else if(form.contents.value==""){
+	}else if(form.question_content.value==""){
 		alert('내용을 입력하세요.');
-	}else {
-		alert('문의사항이 저장되었습니다.\n마이페이지로 이동하시겠습니까?');
-		window.parent.location.href = "mypage.jsp";
 	}
+}
+function save(){
+	
+	alert('등록되었습니다.\문의 목록 화면으로 이동하시겠습니까?');
+	window.parent.location.href="myQuestion.jsp";
 }
 </script>
 

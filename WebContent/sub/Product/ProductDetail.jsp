@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="project.vo_review.*"
+    import="project.dao_review.*"
+    %>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
@@ -10,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>제품상세페이지</title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/main_upper.css">      
 <link type ="text/css" rel="stylesheet" href="<%=path %>/css/detail.css">    
 <style>
@@ -84,7 +88,13 @@ a {
 		   }
 	   }
    }
-   
+   $("#que").click(function(){
+	    if($("#ans").css("display") == "none"){   
+	        $("#ans").css("display","block");  
+	    } else {  
+	        $("#ans").css("display","none");  
+	    }  
+   });
 </script>
   
 </head>
@@ -270,8 +280,7 @@ a {
                     <li class="on"><a href="#detail">상품상세정보</a></li>
                     <li><a href="#delivery">배송안내</a></li>
                     <li><a href="#exchange">교환 및 반품안내</a></li>
-                    <li><a href="#reviews">상품후기 <strong>(1)</strong></a></li>
-                    <li><a href="#qna">상품문의 <strong>(0)</strong></a></li>
+                    <li><a href="#reviews">한줄후기</a></li>
                 </ul>
             </div>
             <!-- //item_goods_tab -->
@@ -384,8 +393,7 @@ a {
                     <li><a href="#detail">상품상세정보</a></li>
                     <li class="on"><a href="#delivery">배송안내</a></li>
                     <li><a href="#exchange">교환 및 반품안내</a></li>
-                    <li><a href="#reviews">상품후기 <strong>(1)</strong></a></li>
-                    <li><a href="#qna">상품문의 <strong>(0)</strong></a></li>
+                    <li><a href="#reviews">한줄후기</a></li>
                 </ul>
             </div>
             <!-- //item_goods_tab -->
@@ -406,8 +414,7 @@ a {
                     <li><a href="#detail">상품상세정보</a></li>
                     <li><a href="#delivery">배송안내</a></li>
                     <li class="on"><a href="#exchange">교환 및 반품안내</a></li>
-                    <li><a href="#reviews">상품후기 <strong>(1)</strong></a></li>
-                    <li><a href="#qna">상품문의 <strong>(0)</strong></a></li>
+                    <li><a href="#reviews">한줄후기</a></li>
                 </ul>
             </div>
             <!-- //item_goods_tab -->
@@ -437,8 +444,7 @@ a {
                     <li><a href="#detail">상품상세정보</a></li>
                     <li><a href="#delivery">배송안내</a></li>
                     <li><a href="#exchange">교환 및 반품안내</a></li>
-                    <li class="on"><a href="#reviews">상품후기 <strong>(1)</strong></a></li>
-                    <li><a href="#qna">상품문의 <strong>(0)</strong></a></li>
+                    <li class="on"><a href="#reviews">한줄후기</a></li>
                 </ul>
             </div>
             <!-- //item_goods_tab -->
@@ -462,24 +468,33 @@ a {
 					            </tr>
 					        </thead>
 					        <tbody>
+				<%
+				DAO_review dao = new DAO_review();
+				ArrayList<Review> rlist = dao.reviewlist();
+				%>	        
+					        
+					        	<%for(Review r:rlist){ %>
 					            <tr class="js_data_row" data-bdid="goodsreview" data-sno="1416" data-auth="y" data-notice="n">
-					                <td><img src="<%=path%>/images/star5.jpg"></td>
+					                <td><%=r.getReview_satisfied() %>/5</td>
 					                <td class="board_tit">
-					                    <a class="js_btn_view " id="que-1">         
-					                        <strong style="cursor:pointer;">조금 작은 사이즈를 생각하고 주문했는데 생각한것보다는 살짝컸지만 오히려 그래서 음식담기 편한느낌이네...</strong>
-					                        <span class="js_comment_count">(1)</span>
+					                    <a class="js_btn_view " id="que">         
+					                        <strong style="cursor:pointer;"><%=r.getReview_title() %></strong>
 					                    </a><br>
-					                    <div class="answer" id="ans-1" style="display:none; background-color:#ededed;" >
+					                    <div class="answer" id="ans" style="display:none; background-color:#ededed;" >
 					                    	<br>
-					                    	조금 작은 사이즈를 생각하고 주문했는데 생각한것보다는 살짝컸지만 
-					                    	오히려 그래서 음식담기 편한느낌이네요. 깔끔하고 좋아요.<br>
+					                    	<%=r.getReview_content() %>
 					                    	<br>
-					                    	<img src="<%=path%>/images/review.jpg" width="300"><br><br>
+					                    	<br>
+					                    	<img src="<%=path%>/images/bowl08.jpg" width="300"><br><br>
 					                    </div>
 					                </td>
 					                <td>홈페이지 구매자</td>
-					                <td>2020.12.01</td>
+					                <td>2021-02-04</td>
 					            </tr>
+					            <%
+					        	} %>
+					            
+					            
 					            <tr class="js_detail" data-bdid="goodsreview" data-sno="1416" data-auth="y" data-notice="n"></tr>
 					        </tbody>
 					    </table>
@@ -501,18 +516,17 @@ a {
 			<!-- //reviews_cont -->
 		</div>
 		<!-- //#reviews -->
-		<div id="qna">
+<!-- 		<div id="qna">
 			<div class="item_goods_tab">
 				<ul>
 					<li><a href="#detail">상품상세정보</a></li>
 					<li><a href="#delivery">배송안내</a></li>
 					<li><a href="#exchange">교환 및 반품안내</a></li>
-					<li><a href="#reviews">상품후기 <strong>(1)</strong></a></li>
-					<li class="on"><a href="#qna">상품문의 <strong>(0)</strong></a></li>
+					<li><a href="#reviews">상품후기</a></li>
 				</ul>
-			</div>
+			</div> -->
 			<!-- //item_goods_tab -->
-			<div class="qna_cont">
+<!-- 			<div class="qna_cont">
 				<h3>상품Q&amp;A</h3>
 				<div id="ajax-goods-goodsqa-list"><div class="qna_table">
 					<table class="qna_table_type">
@@ -547,8 +561,8 @@ a {
 				<a href="customer.jsp" class="btn_qna_more">상품문의 전체보기</a>
 				<a href="goodsQuestion.jsp" class="btn_qna_write">상품문의 글쓰기</a>
 			</div>
-			<!-- //btn_qna_box -->
-		</div>
+			//btn_qna_box
+		</div> -->
 		<!-- //qna_cont -->
 	</div>
 	<!-- //qna -->
@@ -559,7 +573,7 @@ a {
 </div>
 </body>
 <script>
-const items = document.querySelectorAll('.js_btn_view');
+/* const items = document.querySelectorAll('.js_btn_view');
 
 function openCloseAnswer() {
   const answerId = this.id.replace('que', 'ans');
@@ -571,6 +585,7 @@ function openCloseAnswer() {
   }
 }
 
-items.forEach(item => item.addEventListener('click', openCloseAnswer));
+items.forEach(item => item.addEventListener('click', openCloseAnswer)); */
+
 </script>
 </html>

@@ -86,7 +86,7 @@ Review review = dao.getReview(new Integer(review_id));
     		<a><image src="<%=path%>/<%=review.getReview_img_src()%>" width="200px"></a></td></tr>
     	<tr><th>제목</th><td><input name="review_title" value="<%=review.getReview_title()%>"></td></tr>
     	<tr><th>내용</th><td>
-    		<textarea class="content" name="review_content" style="width:300px; height:200px; cursor:pointer;">
+    		<textarea class="content" name="review_content" style="width:300px; height:200px;">
     			<%=review.getReview_content()%>
     		</textarea>
     	<tr><th>평점</th><td><input name="review_satisfied" value="<%=review.getReview_satisfied() %>"></td></tr>
@@ -95,7 +95,6 @@ Review review = dao.getReview(new Integer(review_id));
     <%} %>
     <tr><td colspan="2">
     	<input type="button" value="수정" id="uptBtn"/>
-    	<input type="button" value="삭제" id="delBtn"/>
     </table>
     </form>
 </body>

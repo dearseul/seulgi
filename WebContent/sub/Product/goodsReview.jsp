@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
+    import="java.text.*"
     import="jspexp.z01_vo.*"
     import="project.vo_review.*"
     import="project.dao_review.*"
@@ -55,6 +56,9 @@ String review_title = request.getParameter("review_title");
 if(review_title==null) review_title="";
 String review_content = request.getParameter("review_content");
 if(review_content==null) review_content="";
+Date date = new Date();
+SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+String review_written_date=simple.format(date);
 String review_written_date_s=request.getParameter("review_written_date_s");
 if(review_written_date_s==null) review_written_date_s="";
 log("작성자:"+customer_id);
@@ -64,7 +68,7 @@ log("내용:"+review_content);
 log("날짜:"+review_written_date_s);
 if(!customer_id.equals("")){
 	Review ins = new Review(customer_id,0,review_title,review_content,review_satisfied,
-			"",review_written_date_s,0,1099,"스텐그릇");
+			"",review_written_date,0,1099,"스텐그릇");
 	log("입력내용 확인:"+ins.getCustomer_id());
 	DAO_review dao = new DAO_review();
 	dao.insertReview(ins);
@@ -73,10 +77,12 @@ if(!customer_id.equals("")){
 %>
 
 <body class="body-board body-popup-goods-board-write pc">
-<form method="post">
 <input type="hidden" name="review_written_date_s" value="<%=review_written_date_s %>" >
 <div class="board_write_popup">
-    <div class="ly_tit"><h4>상품후기 쓰기</h4></div>
+    <div class="ly_tit">
+    
+    <h4>상품후기 쓰기</h4></div>
+    <form method="post" >
     <div class="ly_cont">
             <div class="scroll_box">
                 <div class="top_item_photo_info">
@@ -145,17 +151,17 @@ if(!customer_id.equals("")){
             <!-- //scroll_box -->
         <div class="btn_center_box">
             <a href="javascript:window.close()"><button class="btn_ly_cancel"><strong>취소</strong></button></a>
-            <a><input type="submit" value="등록" onclick="goProductDetail()"/></a>
+            <a href=''><button id="btn">저장</button></a>
         </div>
     </div>
+    </form>
     <!-- //ly_cont -->
 </div>
-</form>
 </body>
 <script>
-	function goProductDetail(){
-		alert('등록되었습니다.\n전체후기 화면으로 이동하시겠습니까?');
-		location.href="allReview.jsp";
-	}
+
 </script>
 </html>
+
+
+

@@ -26,6 +26,7 @@
 <%
 DAO_review dao = new DAO_review();
 ArrayList<Review> rlist = dao.reviewlist();
+
 %>
 <body>
 <div class="sub_content">
@@ -74,7 +75,7 @@ ArrayList<Review> rlist = dao.reviewlist();
 								</div>
 
 								<div class="board_name_day">
-									<span class="board_day"><span><%=r.getReview_written_date_s() %></span></span>
+									<span class="board_day"><span><%=r.getReview_written_date() %></span></span>
 								</div>
 							</div>
 							<!-- //gallery_info_cont -->
