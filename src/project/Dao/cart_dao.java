@@ -12,12 +12,10 @@ import java.util.ArrayList;
 import project.vo.Purchase_record;
 
 public class cart_dao {
-
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
 	public void setCon() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -33,7 +31,6 @@ public class cart_dao {
 			System.out.println(e.getMessage());
 		}
 	}
-	
 	public ArrayList<Purchase_record> getIncart(String customer_id) {
 		ArrayList<Purchase_record> prlist = new ArrayList<Purchase_record>();
 		

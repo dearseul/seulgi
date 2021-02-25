@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import ="project.vo.*"
+    import ="project.Dao.*"
+    %>
 <%request.setCharacterEncoding("UTF-8");
 String path = request.getContextPath();
+String customer_id = (String)session.getAttribute("id");
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -66,35 +72,63 @@ String path = request.getContextPath();
     </script>
  
 </head>
+
+<%
+	String product_name = request.getParameter("prodname");
+	String product_id = request.getParameter("prodid");
+	String proc = request.getParameter("proc");
+	String prodname = request.getParameter("prodname2");
+	String prodid = request.getParameter("prodid2");
+	String pass = (String)session.getAttribute("pw");
+	
+	String[] result_index = request.getParameterValues("index00");
+	String[] result_cnt = request.getParameterValues("cnt00");
+%>
 <body>
 <jsp:include page="/main_upper.jsp" flush="false"/>
    <div id="mypage">
+   
+
         <section class="left-profile">
             <div class="wrap-name">
-                <h2><span class="user-name">OOO</span>님 안녕하세요</h2>
+                <h2><span class="user-name"><%=customer_id %></span>님 안녕하세요</h2>
             </div>
             <div class="wrap-img-profile">
                 <img class="img-profile" src="<%=path%>/images/img_profile.png" alt="">
             </div>
-            <div class="wrap-point">
+          <%-- <div class="wrap-point">
                 <ul>
                     <li class="box-coupon">쿠폰 <span class="coupon-cnt">1</span>개</li>
                     <li class="box-point">포인트 <span class="coupon-cnt">1000</span></li>
                 </ul>
-            </div>
+            </div>--%>  
             <a href="<%=path%>/sub/customService/oneQuestion.jsp"><button class="btn-profile btn-question">1:1 문의하기</button></a>
             <button class="btn-profile btn-edit">개인정보 확인/수정</button>
             <button class="btn-profile btn-shipinfo">배송지 관리</button>
         </section>
         <section class="right-order">
+        
+        <jsp:useBean id="c" class="project.vo.Customer" scope="session"/>
+		<jsp:setProperty property="*" name="c" />
+		
+		<jsp:useBean id="prod" class="project.vo.Products" scope="session"></jsp:useBean>
+		<jsp:setProperty property="*" name="prod"/>
+				<jsp:useBean id="pr" class="project.vo.Purchase_record"></jsp:useBean>
+				<jsp:setProperty property="*" name="pr"/>
+		<jsp:useBean id="daop" class="project.dao_payment_page.Dao_payment_page"/>
+		    <c:set var="plist" value="${daop.getMyPro(customer_id) }"></c:set>
+			<% log(customer_id); 
+			%>
+    <caption style="text-align:left;">총건수:${plist.size()}</caption>
+         <c:forEach var="pr" items="${plist}">
             <div class="box-order">
-                <div class="date-order"><span class="date-order-v">2021.01.14</span>주문</div>
+                <div class="date-order"><span class="date-order-v">${pr.purchase_step_date}</span>주문</div>
                 <div class="order-detail">
-                    <div class="status-order">배송완료<span class="date-arrive">1/16 도착</span></div>
+                    <div class="status-order">${pr.purchase_step}<span class="date-arrive">1/16 도착</span></div>
                     <div class="prod-order">
                         <a href="NewFile.jsp"><img class="img-order" src="<%=path%>/images/list_img2.jpg" alt=""></a>
                         <div class="text-order">
-                            <p class="prod-name">커클랜드 베이글 어니언</p>
+                            <p class="prod-name">${pr.product_name}</p>
                             <p class="order-price">9000원</p><p class="order-cnt">1개</p>
                         </div>
                     </div>
@@ -106,6 +140,7 @@ String path = request.getContextPath();
                     <a href="goodsQuestion.jsp"><button class="btn-order">판매자 문의하기</button></a>
                 </div>
             </div>
+       	</c:forEach>
             <div class="box-order">
                 <div class="date-order"><span class="date-order-v">2021.01.14</span>주문</div>
                 <div class="order-detail">

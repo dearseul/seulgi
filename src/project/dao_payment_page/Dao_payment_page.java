@@ -63,6 +63,41 @@ public class Dao_payment_page {
 		}
 		return list;
 	}
+	//=========================================마이페이지 결제상품 가져오기===================================================================
+		public ArrayList<paymentPro> getMyPro(String customer_id) {
+			ArrayList<paymentPro> list = new ArrayList<paymentPro>();
+			try {
+				setCon();
+				String sql = "SELECT p.*, purchase_step, PURCHASE_ID \r\n"
+						+ "FROM PURCHASE_RECORD pr, PRODUCTS p \r\n"
+						+ "WHERE pr.PRODUCT_NAME = p.PRODUCT_NAME\r\n"
+						+ "AND PURCHASE_STEP ='구매완료'\r\n"
+						+ "AND customer_id = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, customer_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+
+					paymentPro y =new paymentPro(rs.getString("product_name"),
+							rs.getInt("product_id"), rs.getString("product_category"), rs.getInt("product_price"),
+							rs.getInt("product_stock"),rs.getInt("product_rate"), rs.getString("product_img_src"), rs.getString("purchase_step"),
+							rs.getInt("purchase_id"));
+					list.add(y);
+				}
+				System.out.println(sql);
+				System.out.println();
+				rs.close();
+				pstmt.close();
+				con.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			return list;
+		}
 //=========================================업데이트문===================================================================
 	public void updateStep(int PURCHASE_ID) {
 		try {
@@ -90,10 +125,11 @@ public class Dao_payment_page {
 
 	
 	public static void main(String[] args) {
-//		Dao_payment_page dao = new Dao_payment_page();
+		Dao_payment_page dao = new Dao_payment_page();
 //		ArrayList<paymentPro> a = dao.getPayPro();
 //		for(paymentPro aa : a ) {
 //			System.out.println(aa.getProduct_id());
 //		}
+		System.out.println(dao.getMyPro("test"));
 	}
 }
